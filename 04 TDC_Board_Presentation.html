@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDC Group · Digital Transformation · Board Presentation</title>
+<style>
+:root {
+  --blue: #003366;
+  --deep: #001F3F;
+  --turq: #00A9A5;
+  --orange: #F58220;
+  --gold: #C9A227;
+  --white: #FFFFFF;
+  --gray: #6B7280;
+  --border: #E5E7EB;
+  --danger: #EF4444;
+  --warning: #F59E0B;
+  --success: #10B981;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0A1628;
+  overflow: hidden;
+}
+
+/* ===== DECK CONTAINER ===== */
+.deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  padding: 6vh 8vw;
+  background: white;
+  color: #1A1A2E;
+  overflow: hidden;
+  animation: slideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide.active { display: flex; }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Slide header */
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2vh;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 4vh;
+  font-size: 0.85vw;
+  color: var(--gray);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.slide-header .brand { color: var(--blue); }
+.slide-header .slide-num { color: var(--turq); }
+
+/* Typography scale */
+h1 {
+  font-size: 4.2vw;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5vh;
+}
+
+h2 {
+  font-size: 2.8vw;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--deep);
+  margin-bottom: 3vh;
+}
+
+h3 {
+  font-size: 1.3vw;
+  font-weight: 700;
+  color: var(--deep);
+  margin-bottom: 1vh;
+}
+
+p.lead {
+  font-size: 1.15vw;
+  line-height: 1.55;
+  color: #4B5563;
+  max-width: 70vw;
+}
+
+.accent { color: var(--turq); }
+.accent-orange { color: var(--orange); }
+
+.slide-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+
+/* ===== SLIDE 1: COVER ===== */
+.slide.cover {
+  background: linear-gradient(135deg, var(--deep) 0%, var(--blue) 55%, #004080 100%);
+  color: white;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.slide.cover::before {
+  content: '';
+  position: absolute;
+  top: -25%; right: -12%;
+  width: 45vw; height: 45vw;
+  background: radial-gradient(circle, rgba(0,169,165,0.18), transparent 70%);
+  border-radius: 50%;
+}
+
+.slide.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -30%; left: -10%;
+  width: 38vw; height: 38vw;
+  background: radial-gradient(circle, rgba(245,130,32,0.11), transparent 70%);
+  border-radius: 50%;
+}
+
+.cover-content {
+  position: relative;
+  z-index: 1;
+  padding: 0 8vw;
+  max-width: 90vw;
+}
+
+.cover-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 1vw;
+  margin-bottom: 5vh;
+  padding: 1.2vh 2vw;
+  background: rgba(0,169,165,0.12);
+  border: 1px solid rgba(0,169,165,0.35);
+  border-radius: 100px;
+  font-size: 0.85vw;
+  font-weight: 700;
+  color: var(--turq);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.cover h1 {
+  font-size: 5vw;
+  color: white;
+  margin-bottom: 2vh;
+}
+
+.cover h1 .grad {
+  background: linear-gradient(135deg, var(--turq), var(--orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cover-sub {
+  font-size: 1.35vw;
+  color: rgba(255,255,255,0.72);
+  max-width: 55vw;
+  margin: 0 auto 6vh;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.cover-meta {
+  display: flex;
+  justify-content: center;
+  gap: 4vw;
+  padding-top: 4vh;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  font-size: 0.9vw;
+}
+
+.cover-meta-item .lbl {
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7vw;
+  font-weight: 700;
+  margin-bottom: 0.6vh;
+}
+
+.cover-meta-item .val {
+  color: white;
+  font-weight: 600;
+}
+
+/* ===== STAT GRID ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: 2vw;
+  margin: 2vh 0;
+}
+
+.stat-box {
+  background: #F9FAFB;
+  border-top: 4px solid var(--blue);
+  padding: 2.5vh 1.5vw;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.stat-box.danger { border-top-color: var(--danger); }
+.stat-box.warn { border-top-color: var(--warning); }
+.stat-box.ok { border-top-color: var(--success); }
+.stat-box.turq { border-top-color: var(--turq); }
+
+.stat-box .num {
+  font-size: 3vw;
+  font-weight: 800;
+  color: var(--blue);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.stat-box.danger .num { color: var(--danger); }
+.stat-box.ok .num { color: var(--success); }
+.stat-box.turq .num { color: var(--turq); }
+
+.stat-box .lbl {
+  font-size: 0.78vw;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 1vh;
+  font-weight: 700;
+}
+
+/* ===== SCORECARD TABLE ===== */
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1vw;
+}
+
+.score-table th {
+  background: var(--deep);
+  color: white;
+  text-align: left;
+  padding: 1.4vh 1.2vw;
+  font-size: 0.75vw;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+}
+
+.score-table td {
+  padding: 1.6vh 1.2vw;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.score-table tr:nth-child(even) td { background: #F9FAFB; }
+
+.score-val {
+  font-size: 1.6vw;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: -0.03em;
+}
+
+.score-val.low { color: var(--danger); }
+.score-val.mid { color: var(--warning); }
+.score-val.high { color: var(--success); }
+
+.score-bar {
+  height: 0.8vh;
+  background: #E5E7EB;
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 8vw;
+}
+
+.score-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--turq), var(--blue));
+  border-radius: 4px;
+}
+
+/* ===== FINDING CARDS ===== */
+.findings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8vw;
+}
+
+.finding {
+  background: #F9FAFB;
+  border-left: 4px solid var(--turq);
+  padding: 2vh 1.5vw;
+  border-radius: 4px;
+}
+
+.finding.sev-high { border-left-color: var(--danger); }
+.finding.sev-med { border-left-color: var(--warning); }
+
+.finding .tag {
+  font-size: 0.7vw;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--turq);
+  margin-bottom: 0.8vh;
+}
+
+.finding.sev-high .tag { color: var(--danger); }
+.finding.sev-med .tag { color: var(--warning); }
+
+.finding h4 {
+  font-size: 1.05vw;
+  font-weight: 700;
+  color: var(--deep);
+  margin-bottom: 0.8vh;
+  line-height: 1.25;
+}
+
+.finding p {
+  font-size: 0.85vw;
+  color: var(--gray);
+  line-height: 1.45;
+}
+
+/* ===== ARCHITECTURE LAYERS ===== */
+.arch-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2vh;
+}
+
+.arch-layer {
+  display: flex;
+  align-items: center;
+  gap: 1.5vw;
+  padding: 1.6vh 1.5vw;
+  background: #F9FAFB;
+  border-left: 4px solid var(--turq);
+  border-radius: 4px;
+}
+
+.arch-layer .num {
+  width: 2.5vw;
+  height: 2.5vw;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--turq), var(--blue));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1vw;
+  flex-shrink: 0;
+}
+
+.arch-layer .title {
+  font-weight: 800;
+  font-size: 1vw;
+  color: var(--deep);
+  min-width: 14vw;
+}
+
+.arch-layer .desc {
+  font-size: 0.85vw;
+  color: var(--gray);
+  flex: 1;
+  line-height: 1.4;
+}
+
+/* ===== ROADMAP ===== */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5vw;
+}
+
+.phase {
+  background: white;
+  border: 1px solid var(--border);
+  border-top: 5px solid var(--blue);
+  border-radius: 6px;
+  padding: 2.5vh 1.5vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.phase.p1 { border-top-color: var(--danger); }
+.phase.p2 { border-top-color: var(--warning); }
+.phase.p3 { border-top-color: #3B82F6; }
+.phase.p4 { border-top-color: var(--success); }
+
+.phase-label {
+  font-size: 0.7vw;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--turq);
+  margin-bottom: 1vh;
+}
+
+.phase.p1 .phase-label { color: var(--danger); }
+.phase.p2 .phase-label { color: var(--warning); }
+.phase.p3 .phase-label { color: #3B82F6; }
+.phase.p4 .phase-label { color: var(--success); }
+
+.phase h3 {
+  font-size: 1.15vw;
+  margin-bottom: 0.6vh;
+  line-height: 1.2;
+}
+
+.phase .duration {
+  font-size: 0.8vw;
+  color: var(--orange);
+  font-weight: 700;
+  margin-bottom: 1.5vh;
+}
+
+.phase ul {
+  list-style: none;
+  flex: 1;
+}
+
+.phase li {
+  font-size: 0.8vw;
+  color: var(--gray);
+  padding: 0.5vh 0 0.5vh 1vw;
+  position: relative;
+  line-height: 1.4;
+}
+
+.phase li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--turq);
+  font-weight: 800;
+}
+
+/* ===== INVESTMENT BOX ===== */
+.invest-box {
+  background: linear-gradient(135deg, var(--deep), var(--blue));
+  color: white;
+  border-radius: 8px;
+  padding: 4vh 3vw;
+}
+
+.invest-box h3 {
+  color: var(--turq);
+  font-size: 1.1vw;
+  margin-bottom: 3vh;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.invest-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2vw;
+}
+
+.invest-item {
+  border-left: 3px solid rgba(0,169,165,0.4);
+  padding-left: 1.2vw;
+}
+
+.invest-item .lbl {
+  font-size: 0.75vw;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8vh;
+  font-weight: 700;
+}
+
+.invest-item .val {
+  font-size: 1.6vw;
+  font-weight: 800;
+  color: var(--turq);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.invest-item .val.orange { color: var(--orange); }
+
+/* ===== ENGAGEMENT MODEL ===== */
+.engagement-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2vw;
+}
+
+.eng-card {
+  background: #F9FAFB;
+  border-radius: 8px;
+  padding: 3vh 2vw;
+  border-top: 4px solid var(--turq);
+  text-align: center;
+}
+
+.eng-card .icon {
+  font-size: 2.5vw;
+  margin-bottom: 1.5vh;
+}
+
+.eng-card h3 {
+  font-size: 1.15vw;
+  margin-bottom: 1vh;
+}
+
+.eng-card p {
+  font-size: 0.85vw;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+/* ===== CREDENTIALS ===== */
+.creds-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5vh;
+}
+
+.cred {
+  display: flex;
+  align-items: center;
+  gap: 1.5vw;
+  padding: 1.8vh 1.8vw;
+  background: #F9FAFB;
+  border-radius: 6px;
+  border-left: 4px solid var(--orange);
+}
+
+.cred .icon {
+  font-size: 1.8vw;
+  flex-shrink: 0;
+}
+
+.cred h4 {
+  font-size: 1vw;
+  font-weight: 700;
+  color: var(--deep);
+  margin-bottom: 0.3vh;
+}
+
+.cred p {
+  font-size: 0.82vw;
+  color: var(--gray);
+}
+
+/* ===== NEXT STEPS ===== */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8vh;
+  margin-top: 2vh;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+  padding: 2vh 2vw;
+  background: #F9FAFB;
+  border-radius: 6px;
+}
+
+.step .num {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--turq), var(--blue));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.2vw;
+  flex-shrink: 0;
+}
+
+.step .text h4 {
+  font-size: 1.05vw;
+  font-weight: 700;
+  color: var(--deep);
+  margin-bottom: 0.3vh;
+}
+
+.step .text p {
+  font-size: 0.85vw;
+  color: var(--gray);
+}
+
+/* ===== CONTACT SLIDE ===== */
+.slide.contact {
+  background: linear-gradient(135deg, var(--deep), var(--blue));
+  color: white;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.slide.contact h2 {
+  color: white;
+  font-size: 3.5vw;
+  margin-bottom: 2vh;
+}
+
+.slide.contact .tagline {
+  font-size: 1.2vw;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6vh;
+  max-width: 60vw;
+  font-style: italic;
+}
+
+.contact-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(0,169,165,0.3);
+  border-radius: 12px;
+  padding: 4vh 5vw;
+  display: inline-block;
+}
+
+.contact-card .name {
+  font-size: 2vw;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.8vh;
+}
+
+.contact-card .role {
+  font-size: 1vw;
+  color: var(--turq);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  margin-bottom: 3vh;
+}
+
+.contact-card .line {
+  font-size: 1vw;
+  color: rgba(255,255,255,0.85);
+  margin: 0.8vh 0;
+}
+
+.contact-card a {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ===== NAVIGATION CONTROLS ===== */
+.nav-controls {
+  position: fixed;
+  bottom: 2vh;
+  right: 2vw;
+  display: flex;
+  gap: 0.8vw;
+  z-index: 1000;
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+
+.nav-controls:hover { opacity: 1; }
+
+.nav-btn {
+  width: 3vw;
+  height: 3vw;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,51,102,0.9);
+  color: white;
+  font-size: 1.2vw;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.nav-btn:hover { background: var(--turq); transform: scale(1.1); }
+
+.nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--turq), var(--orange));
+  z-index: 1001;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-counter {
+  position: fixed;
+  bottom: 3.5vh;
+  left: 3vw;
+  font-size: 0.8vw;
+  color: rgba(255,255,255,0.4);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  z-index: 1000;
+  background: rgba(0,31,63,0.6);
+  padding: 0.6vh 1.2vw;
+  border-radius: 100px;
+}
+
+/* ===== PRINT ===== */
+@media print {
+  @page { size: landscape; margin: 0; }
+  html, body { overflow: visible; background: white; }
+  .deck { height: auto; }
+  .slide {
+    position: relative;
+    display: flex !important;
+    page-break-after: always;
+    height: 100vh;
+    animation: none;
+  }
+  .nav-controls, .slide-counter, .progress-bar { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="deck" id="deck">
+
+  <!-- SLIDE 1: COVER -->
+  <div class="slide cover active">
+    <div class="cover-content">
+      <div class="cover-brand">🎯 Board Briefing · October 2026</div>
+      <h1>Digital <span class="grad">Transformation</span><br>Proposal</h1>
+      <p class="cover-sub">A unified platform connecting all nine TDC divisions — restoring customer experience, enabling cross-division revenue, and delivering real-time Group intelligence.</p>
+      <div class="cover-meta">
+        <div class="cover-meta-item">
+          <div class="lbl">Prepared by</div>
+          <div class="val">B. Cuthbert John, PMP</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="lbl">Engagement</div>
+          <div class="val">Hybrid Consulting</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="lbl">Timeline</div>
+          <div class="val">18 Months</div>
+        </div>
+        <div class="cover-meta-item">
+          <div class="lbl">Classification</div>
+          <div class="val">Confidential</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: THE GROUP -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">TDC Group of Companies</span>
+      <span class="slide-num">02 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>One Group. Nine Divisions. <span class="accent">Fifty Years of Trust.</span></h2>
+      <p class="lead" style="margin-bottom: 3vh;">TDC Group is one of the most diversified business houses in the Eastern Caribbean — with interests spanning retail, automotive, financial services, insurance, shipping, travel, and real estate across St. Kitts and Nevis.</p>
+      <div class="stat-grid">
+        <div class="stat-box turq">
+          <div class="num">9</div>
+          <div class="lbl">Business Divisions</div>
+        </div>
+        <div class="stat-box turq">
+          <div class="num">500+</div>
+          <div class="lbl">Employees</div>
+        </div>
+        <div class="stat-box turq">
+          <div class="num">EC$137M</div>
+          <div class="lbl">Annual Revenue</div>
+        </div>
+        <div class="stat-box turq">
+          <div class="num">50+</div>
+          <div class="lbl">Years of Service</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: THE PROBLEM -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">The Challenge</span>
+      <span class="slide-num">03 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>The Digital Estate Has Fallen Behind</h2>
+      <p class="lead" style="margin-bottom: 4vh;">An independent assessment of TDC's public digital properties places the Group at <strong>2.8 out of 10</strong> in overall digital maturity — well below the 6–7 typical of comparable regional conglomerates operating unified platforms.</p>
+      <div class="stat-grid">
+        <div class="stat-box danger">
+          <div class="num">2.8</div>
+          <div class="lbl">Digital Maturity Score</div>
+        </div>
+        <div class="stat-box danger">
+          <div class="num">2 / 9</div>
+          <div class="lbl">Divisions Transacting Online</div>
+        </div>
+        <div class="stat-box warn">
+          <div class="num">5</div>
+          <div class="lbl">Disconnected Digital Properties</div>
+        </div>
+        <div class="stat-box warn">
+          <div class="num">0</div>
+          <div class="lbl">Unified Customer Identity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: WHAT WE FOUND -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">Assessment Findings</span>
+      <span class="slide-num">04 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>Comprehensive Analysis of the Current Estate</h2>
+      <p class="lead" style="margin-bottom: 3vh;">Every finding is evidence-based, drawn from direct inspection of TDC's public digital properties, published reports, and third-party technical analysis.</p>
+      <div class="stat-grid">
+        <div class="stat-box danger">
+          <div class="num">23</div>
+          <div class="lbl">Weaknesses Identified</div>
+        </div>
+        <div class="stat-box warn">
+          <div class="num">8</div>
+          <div class="lbl">Vulnerabilities</div>
+        </div>
+        <div class="stat-box warn">
+          <div class="num">14</div>
+          <div class="lbl">Strategic Gaps</div>
+        </div>
+        <div class="stat-box turq">
+          <div class="num">24</div>
+          <div class="lbl">Prioritised Recommendations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: CRITICAL FINDINGS -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">Critical Findings</span>
+      <span class="slide-num">05 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>Six Issues Requiring Immediate Attention</h2>
+      <div class="findings-grid">
+        <div class="finding sev-high">
+          <div class="tag">Critical · W1</div>
+          <h4>No Unified Customer Identity</h4>
+          <p>Customers create separate accounts for each division. No cross-division intelligence; fragmented experience.</p>
+        </div>
+        <div class="finding sev-high">
+          <div class="tag">Critical · W10</div>
+          <h4>No Cross-Division Bundling</h4>
+          <p>Vehicle + insurance + financing bundles not offered. Missed revenue; competitors capture bundled needs.</p>
+        </div>
+        <div class="finding sev-high">
+          <div class="tag">Critical · V2</div>
+          <h4>Missing Security Headers</h4>
+          <p>No HSTS, CSP, or X-Frame-Options. Elevated risk of clickjacking and XSS attacks.</p>
+        </div>
+        <div class="finding sev-high">
+          <div class="tag">Critical · V7</div>
+          <h4>Payment Crediting Delay</h4>
+          <p>Customer reviews cite 5-day delay for account credit via TDC's own payment site. Trust erosion.</p>
+        </div>
+        <div class="finding sev-med">
+          <div class="tag">High · W4</div>
+          <h4>No Online Loan Application</h4>
+          <p>Financial Services requires branch visits or calls. High friction; excludes after-hours applicants.</p>
+        </div>
+        <div class="finding sev-med">
+          <div class="tag">High · W5</div>
+          <h4>No Instant Insurance Quote</h4>
+          <p>Quotes answered manually within 24 hours. Competitors offer instant quotes online.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: SCORECARD -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">Digital Maturity Scorecard</span>
+      <span class="slide-num">06 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>Current vs Target State</h2>
+      <table class="score-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">Domain</th>
+            <th style="width: 10%;">Current</th>
+            <th style="width: 25%;">Progress</th>
+            <th style="width: 10%;">Target</th>
+            <th>Key Finding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Customer Experience</strong></td>
+            <td><span class="score-val low">2/10</span></td>
+            <td><div class="score-bar"><span style="width: 20%;"></span></div></td>
+            <td><span class="score-val high">8/10</span></td>
+            <td>No unified identity; only 2 divisions transact online</td>
+          </tr>
+          <tr>
+            <td><strong>Technical Architecture</strong></td>
+            <td><span class="score-val mid">3/10</span></td>
+            <td><div class="score-bar"><span style="width: 30%;"></span></div></td>
+            <td><span class="score-val high">8/10</span></td>
+            <td>Five disconnected domains; no API-first design</td>
+          </tr>
+          <tr>
+            <td><strong>Process Integration</strong></td>
+            <td><span class="score-val low">2/10</span></td>
+            <td><div class="score-bar"><span style="width: 20%;"></span></div></td>
+            <td><span class="score-val high">7/10</span></td>
+            <td>Division-level silos; no shared data layer</td>
+          </tr>
+          <tr>
+            <td><strong>Content &amp; Engagement</strong></td>
+            <td><span class="score-val mid">3/10</span></td>
+            <td><div class="score-bar"><span style="width: 30%;"></span></div></td>
+            <td><span class="score-val high">8/10</span></td>
+            <td>Brochure-style content; no SEO, no live chat</td>
+          </tr>
+          <tr>
+            <td><strong>Security &amp; Compliance</strong></td>
+            <td><span class="score-val mid">4/10</span></td>
+            <td><div class="score-bar"><span style="width: 40%;"></span></div></td>
+            <td><span class="score-val high">9/10</span></td>
+            <td>No MFA, missing security headers, PII scattered</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: THE OPPORTUNITY -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">The Opportunity</span>
+      <span class="slide-num">07 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>Three Categories of Value</h2>
+      <div class="findings-grid">
+        <div class="finding" style="border-left-color: var(--success);">
+          <div class="tag" style="color: var(--success);">Revenue Growth</div>
+          <h4>+5% to +8% Group Revenue</h4>
+          <p>Cross-division selling — vehicle + insurance + financing; home improvement + loan + shipping. Improved digital conversion.</p>
+        </div>
+        <div class="finding" style="border-left-color: var(--turq);">
+          <div class="tag">Cost Reduction</div>
+          <h4>EC$2.8M – $4.0M Annually</h4>
+          <p>Elimination of duplicate data entry, automated inventory reordering, reduced paper processing, productivity gains.</p>
+        </div>
+        <div class="finding" style="border-left-color: var(--orange);">
+          <div class="tag" style="color: var(--orange);">Strategic Positioning</div>
+          <h4>Digital Leadership in the OECS</h4>
+          <p>Real-time Group analytics, omnichannel experience, and a scalable platform for future expansion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: ARCHITECTURE -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">Solution Architecture</span>
+      <span class="slide-num">08 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>Five-Layer Modular Architecture</h2>
+      <div class="arch-layers">
+        <div class="arch-layer">
+          <div class="num">1</div>
+          <div class="title">Presentation Layer</div>
+          <div class="desc">React/TypeScript + Tailwind. Customer Portal, Staff Portal, Executive Dashboard. Progressive Web App for mobile.</div>
+        </div>
+        <div class="arch-layer">
+          <div class="num">2</div>
+          <div class="title">API Gateway</div>
+          <div class="desc">Authentication, rate limiting, routing, monitoring, logging. Single entry point for all client requests.</div>
+        </div>
+        <div class="arch-layer">
+          <div class="num">3</div>
+          <div class="title">Business Logic</div>
+          <div class="desc">Domain modules per division. Shared services: Identity, Payments, Notifications, Documents.</div>
+        </div>
+        <div class="arch-layer">
+          <div class="num">4</div>
+          <div class="title">Data Layer</div>
+          <div class="desc">PostgreSQL (primary), Redis (cache), S3 (documents), Elasticsearch (search).</div>
+        </div>
+        <div class="arch-layer">
+          <div class="num">5</div>
+          <div class="title">Integration Layer</div>
+          <div class="desc">QuickBooks Online, Payment Gateways, SMS/Email, Customs, Credit Bureau. API-first design.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: ROADMAP -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">18-Month Roadmap</span>
+      <span class="slide-num">09 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>Four Phases. Measurable Value at Every Stage.</h2>
+      <div class="roadmap-grid">
+        <div class="phase p1">
+          <div class="phase-label">Phase 1</div>
+          <h3>Foundation &amp; Security</h3>
+          <div class="duration">Months 1–3</div>
+          <ul>
+            <li>Security audit</li>
+            <li>Unified SSO</li>
+            <li>MFA rollout</li>
+            <li>Payment fix</li>
+            <li>Performance</li>
+          </ul>
+        </div>
+        <div class="phase p2">
+          <div class="phase-label">Phase 2</div>
+          <h3>Quick Wins &amp; Revenue</h3>
+          <div class="duration">Months 3–6</div>
+          <ul>
+            <li>Customer dashboard</li>
+            <li>Instant insurance quote</li>
+            <li>Loan pre-qualification</li>
+            <li>Cross-division bundling</li>
+            <li>AI live chat</li>
+          </ul>
+        </div>
+        <div class="phase p3">
+          <div class="phase-label">Phase 3</div>
+          <h3>Integration &amp; Expansion</h3>
+          <div class="duration">Months 6–12</div>
+          <ul>
+            <li>API gateway</li>
+            <li>Unified inventory</li>
+            <li>Mobile PWA</li>
+            <li>Automotive / Shipping / Real Estate portals</li>
+            <li>Executive dashboard</li>
+          </ul>
+        </div>
+        <div class="phase p4">
+          <div class="phase-label">Phase 4</div>
+          <h3>Optimisation &amp; Intelligence</h3>
+          <div class="duration">Months 12–18</div>
+          <ul>
+            <li>Full back-office integration</li>
+            <li>AI personalisation</li>
+            <li>Predictive analytics</li>
+            <li>Omnichannel orchestration</li>
+            <li>Continuous improvement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: INVESTMENT -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">Investment &amp; Return</span>
+      <span class="slide-num">10 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>The Numbers</h2>
+      <div class="invest-box">
+        <h3>Investment Summary</h3>
+        <div class="invest-grid">
+          <div class="invest-item">
+            <div class="lbl">Total Build Investment</div>
+            <div class="val">EC$1.26M – $1.64M</div>
+          </div>
+          <div class="invest-item">
+            <div class="lbl">Annual Ongoing</div>
+            <div class="val">EC$440K – $620K</div>
+          </div>
+          <div class="invest-item">
+            <div class="lbl">Annual Benefit</div>
+            <div class="val orange">EC$9.7M – $15M</div>
+          </div>
+          <div class="invest-item">
+            <div class="lbl">Payback Period</div>
+            <div class="val orange">12 – 18 Months</div>
+          </div>
+        </div>
+      </div>
+      <p class="lead" style="margin-top: 3vh; font-size: 1vw; max-width: 100%;">
+        Estimated three-year return on investment exceeds <strong>350%</strong>, driven by cross-division revenue uplift and operating cost reduction.
+      </p>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: ENGAGEMENT MODEL -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">Engagement Model</span>
+      <span class="slide-num">11 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>Hybrid Consulting — <span class="accent">Not a Traditional Hire</span></h2>
+      <p class="lead" style="margin-bottom: 3vh;">Senior expertise and international best practice without the cost and commitment of a full-time executive.</p>
+      <div class="engagement-grid">
+        <div class="eng-card">
+          <div class="icon">🌐</div>
+          <h3>Remote Leadership</h3>
+          <p>Analysis, requirements, solution design, and project coordination led remotely from Texas.</p>
+        </div>
+        <div class="eng-card">
+          <div class="icon">✈️</div>
+          <h3>Onsite Visits</h3>
+          <p>Six to eight milestone visits to St. Kitts over 18 months for workshops, reviews, and UAT.</p>
+        </div>
+        <div class="eng-card">
+          <div class="icon">🤝</div>
+          <h3>In-Country Backstop</h3>
+          <p>Vetted Systems Analyst based in St. Kitts for daily coordination and user support.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: WHY ME -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">Why B. Cuthbert John</span>
+      <span class="slide-num">12 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>35+ Years. Proven. Caribbean-Rooted.</h2>
+      <div class="creds-list">
+        <div class="cred">
+          <div class="icon">📜</div>
+          <div>
+            <h4>PMP Certified Since 2010 · Bachelor's in Accounting (1986)</h4>
+            <p>Project governance discipline plus financial acumen — the rare combination for systems transformation.</p>
+          </div>
+        </div>
+        <div class="cred">
+          <div class="icon">💻</div>
+          <div>
+            <h4>Systems Design Since 1986 · 35+ Years Continuous Practice</h4>
+            <p>From COBOL and Fortran to today's AI-assisted tools — a career built on translating business needs into working systems.</p>
+          </div>
+        </div>
+        <div class="cred">
+          <div class="icon">🌴</div>
+          <div>
+            <h4>Caribbean Portfolio · 27+ Applications in 15 Months</h4>
+            <p>QuickBooks-native tools, IFRS reporting, climate-finance MRV, and government M&E systems — built for our region's context.</p>
+          </div>
+        </div>
+        <div class="cred">
+          <div class="icon">🏆</div>
+          <div>
+            <h4>Halcyon Accelerator Finalist 2026 · QuickBooks Advanced ProAdvisor</h4>
+            <p>Recognised innovation in climate-finance technology. 20 years of practical QuickBooks expertise.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: DELIVERABLES -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">What You Receive</span>
+      <span class="slide-num">13 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>Interactive Prototypes · Real Demonstrations</h2>
+      <p class="lead" style="margin-bottom: 3vh;">Every prototype is fully interactive — not a mockup, but working software you can click through.</p>
+      <div class="findings-grid">
+        <div class="finding" style="border-left-color: var(--blue);">
+          <div class="tag" style="color: var(--blue);">Full Group</div>
+          <h4>TDC Group Integrated Platform</h4>
+          <p>Unified customer portal, back-office suite, executive analytics across all nine divisions.</p>
+        </div>
+        <div class="finding" style="border-left-color: #2E7D32;">
+          <div class="tag" style="color: #2E7D32;">Division · Retail</div>
+          <h4>Home &amp; Building Depot</h4>
+          <p>E-commerce with 10,000+ SKUs, project planner, contractor desk, multi-option delivery.</p>
+        </div>
+        <div class="finding" style="border-left-color: var(--turq);">
+          <div class="tag">Division · Finance</div>
+          <h4>Financial Services</h4>
+          <p>Six financial products, interactive loan calculator, online application, account dashboard.</p>
+        </div>
+        <div class="finding" style="border-left-color: var(--gold);">
+          <div class="tag" style="color: var(--gold);">Division · Insurance</div>
+          <h4>TDC Insurance</h4>
+          <p>Instant quote engine, digital claims workflow, policy dashboard, cross-sell bundling.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 14: NEXT STEPS -->
+  <div class="slide">
+    <div class="slide-header">
+      <span class="brand">Next Steps</span>
+      <span class="slide-num">14 / 15</span>
+    </div>
+    <div class="slide-body">
+      <h2>The Path Forward</h2>
+      <div class="steps-list">
+        <div class="step">
+          <div class="num">1</div>
+          <div class="text">
+            <h4>Board Review of Proposal</h4>
+            <p>Executive team reviews the Transformation Hub, Executive Summary, and prototypes.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div class="text">
+            <h4>Discovery Workshop</h4>
+            <p>Onsite or virtual session to validate findings and confirm Phase 1 scope.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div class="text">
+            <h4>Engagement Agreement</h4>
+            <p>Formal agreement executed covering scope, deliverables, and commercial terms.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <div class="text">
+            <h4>Phase 1 Mobilisation</h4>
+            <p>Begin within 30 days. Security audit and unified SSO in the first quarter.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 15: CONTACT -->
+  <div class="slide contact">
+    <h2>Let's Transform TDC Together</h2>
+    <p class="tagline">"The businesses are strong. The brand is respected. The customer base is loyal. The moment to lead digitally is now."</p>
+    <div class="contact-card">
+      <div class="name">B. Cuthbert John, PMP</div>
+      <div class="role">Systems Analyst &amp; AI Business Architect</div>
+      <div class="line">📧 <a href="mailto:cuthbert@oecstrading.com">cuthbert@oecstrading.com</a></div>
+      <div class="line">📞 +1 (954) 478-6113</div>
+      <div class="line">🌐 <a href="https://oecstrading.com/portfolio">oecstrading.com/portfolio</a></div>
+      <div class="line" style="margin-top: 2vh; font-size: 0.85vw; color: rgba(255,255,255,0.5);">Available for virtual or onsite presentation within two weeks</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NAVIGATION -->
+<div class="slide-counter" id="slideCounter">01 / 15</div>
+<div class="nav-controls">
+  <button class="nav-btn" onclick="prevSlide()" id="prevBtn" title="Previous (←)">‹</button>
+  <button class="nav-btn" onclick="nextSlide()" id="nextBtn" title="Next (→)">›</button>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+const progressBar = document.getElementById('progressBar');
+const counter = document.getElementById('slideCounter');
+
+function updateSlide() {
+  slides.forEach((s, i) => {
+    s.classList.toggle('active', i === current);
+  });
+  progressBar.style.width = ((current + 1) / total * 100) + '%';
+  counter.textContent = String(current + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+  document.getElementById('prevBtn').disabled = current === 0;
+  document.getElementById('nextBtn').disabled = current === total - 1;
+}
+
+function nextSlide() {
+  if (current < total - 1) { current++; updateSlide(); }
+}
+
+function prevSlide() {
+  if (current > 0) { current--; updateSlide(); }
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+    e.preventDefault();
+    nextSlide();
+  } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+    e.preventDefault();
+    prevSlide();
+  } else if (e.key === 'Home') {
+    current = 0; updateSlide();
+  } else if (e.key === 'End') {
+    current = total - 1; updateSlide();
+  } else if (e.key === 'p' || e.key === 'P') {
+    window.print();
+  }
+});
+
+// Touch swipe support
+let touchStartX = 0;
+document.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+document.addEventListener('touchend', (e) => {
+  const touchEndX = e.changedTouches[0].screenX;
+  const diff = touchStartX - touchEndX;
+  if (Math.abs(diff) > 50) {
+    if (diff > 0) nextSlide();
+    else prevSlide();
+  }
+});
+
+updateSlide();
+</script>
+
+</body>
+</html>

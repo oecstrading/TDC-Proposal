@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDC Insurance — Digital Platform Prototype</title>
+<style>
+:root {
+  --ins-primary: #003366;
+  --ins-accent: #00A9A5;
+  --ins-gold: #C9A227;
+  --ins-dark: #001F3F;
+  --ins-light: #F0F7FA;
+  --ins-white: #FFFFFF;
+  --ins-gray: #6B7280;
+  --ins-border: #E0E8EE;
+  --ins-success: #10B981;
+  --ins-warning: #F59E0B;
+  --ins-danger: #EF4444;
+  --radius: 12px;
+  --shadow: 0 4px 20px rgba(0,51,102,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,51,102,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: #F5F9FA;
+  color: #1A1A2E;
+  line-height: 1.6;
+}
+
+/* Header */
+.header {
+  background: var(--ins-primary);
+  color: white;
+  padding: 0 32px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.logo-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--ins-accent), var(--ins-gold));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.header-nav {
+  display: flex;
+  gap: 28px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.header-nav a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.header-nav a:hover { color: var(--ins-accent); }
+
+.header-actions { display: flex; gap: 12px; }
+
+.btn-login {
+  padding: 9px 22px;
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: transparent;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-login:hover { background: rgba(255,255,255,0.1); }
+
+.btn-quote {
+  padding: 9px 22px;
+  border-radius: 22px;
+  border: none;
+  background: var(--ins-gold);
+  color: var(--ins-dark);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-quote:hover { background: #DDB52E; transform: translateY(-1px); }
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, var(--ins-dark), var(--ins-primary));
+  color: white;
+  padding: 64px 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -5%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,169,165,0.13), transparent 70%);
+  border-radius: 50%;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40%; left: -5%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(201,162,39,0.08), transparent 70%);
+  border-radius: 50%;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,169,165,0.15);
+  border: 1px solid rgba(0,169,165,0.3);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ins-accent);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  max-width: 720px;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--ins-accent), var(--ins-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.75);
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-hero-primary {
+  padding: 14px 32px;
+  border-radius: 28px;
+  border: none;
+  background: var(--ins-gold);
+  color: var(--ins-dark);
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 4px 20px rgba(201,162,39,0.35);
+  transition: all 0.25s;
+}
+
+.btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,162,39,0.45); }
+
+.btn-hero-secondary {
+  padding: 14px 32px;
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-hero-secondary:hover { background: rgba(255,255,255,0.15); }
+
+.stats-bar {
+  display: flex;
+  gap: 48px;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+
+.stat h3 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--ins-accent);
+}
+
+.stat p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 32px;
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  color: var(--ins-gray);
+  font-size: 15px;
+  margin-bottom: 32px;
+}
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.product-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--ins-border);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ins-accent), var(--ins-gold));
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.product-card .icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0,169,165,0.1), rgba(0,51,102,0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+.product-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.product-card p {
+  font-size: 14px;
+  color: var(--ins-gray);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.product-features {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.product-features li {
+  font-size: 13px;
+  color: var(--ins-gray);
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-features li::before {
+  content: '✓';
+  color: var(--ins-accent);
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.btn-product {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--ins-primary);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-product:hover { background: var(--ins-dark); }
+
+/* Quick Quote Section */
+.quote-section {
+  background: white;
+  border-radius: var(--radius);
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--ins-border);
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--ins-accent), var(--ins-gold), var(--ins-accent));
+}
+
+.quote-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.quote-header h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--ins-primary);
+  margin-bottom: 8px;
+}
+
+.quote-header p {
+  color: var(--ins-gray);
+  font-size: 15px;
+}
+
+.quote-type-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.quote-type {
+  padding: 20px 12px;
+  border-radius: 10px;
+  border: 2px solid var(--ins-border);
+  background: white;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.quote-type:hover {
+  border-color: var(--ins-accent);
+  transform: translateY(-2px);
+}
+
+.quote-type.active {
+  border-color: var(--ins-accent);
+  background: rgba(0,169,165,0.06);
+  box-shadow: 0 4px 16px rgba(0,169,165,0.15);
+}
+
+.quote-type .qt-icon {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.quote-type .qt-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ins-primary);
+}
+
+.quote-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.full { grid-column: 1 / -1; }
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ins-primary);
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  padding: 12px 16px;
+  border: 1px solid var(--ins-border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s;
+  background: white;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline: none;
+  border-color: var(--ins-accent);
+  box-shadow: 0 0 0 3px rgba(0,169,165,0.1);
+}
+
+.btn-submit {
+  padding: 16px 40px;
+  border-radius: 10px;
+  border: none;
+  background: var(--ins-accent);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 20px;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.btn-submit:hover { background: #00C4BF; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,169,165,0.3); }
+
+/* Quote Result Preview */
+.quote-result {
+  background: linear-gradient(135deg, var(--ins-light), #E8F4F6);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-top: 24px;
+  border: 1px solid rgba(0,169,165,0.2);
+}
+
+.quote-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.quote-result-header h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ins-primary);
+}
+
+.quote-premium {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--ins-accent);
+  letter-spacing: -1px;
+}
+
+.quote-premium small {
+  font-size: 14px;
+  color: var(--ins-gray);
+  font-weight: 600;
+}
+
+.quote-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.quote-detail {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--ins-border);
+}
+
+.quote-detail .label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ins-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.quote-detail .value {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--ins-primary);
+}
+
+/* Claims portal */
+.claims-section {
+  background: white;
+  border-radius: var(--radius);
+  padding: 36px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--ins-border);
+  margin-bottom: 48px;
+}
+
+.claims-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.claim-step {
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.claim-step .step-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ins-accent), var(--ins-primary));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 auto 16px;
+}
+
+.claim-step h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--ins-primary);
+}
+
+.claim-step p {
+  font-size: 13px;
+  color: var(--ins-gray);
+}
+
+/* Dashboard preview */
+.dashboard-preview {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid var(--ins-border);
+  margin-bottom: 48px;
+}
+
+.dash-header {
+  background: var(--ins-primary);
+  color: white;
+  padding: 20px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dash-header h3 { font-size: 16px; font-weight: 700; }
+
+.dash-body { padding: 28px; }
+
+.dash-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.dash-kpi {
+  background: var(--ins-light);
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid var(--ins-border);
+}
+
+.dash-kpi .label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ins-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.dash-kpi .value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ins-primary);
+}
+
+.dash-kpi .value.accent { color: var(--ins-accent); }
+
+.dash-kpi .sub {
+  font-size: 12px;
+  color: var(--ins-gray);
+  margin-top: 4px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ins-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--ins-border);
+  background: var(--ins-light);
+}
+
+.data-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--ins-border);
+}
+
+.data-table tr:hover td { background: rgba(0,169,165,0.04); }
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-badge.active { background: #D1FAE5; color: #065F46; }
+.status-badge.pending { background: #FEF3C7; color: #92400E; }
+.status-badge.processing { background: #DBEAFE; color: #1E40AF; }
+
+/* Cross-sell banner */
+.crosssell-banner {
+  background: linear-gradient(135deg, var(--ins-primary), var(--ins-dark));
+  color: white;
+  border-radius: var(--radius);
+  padding: 36px;
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.crosssell-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(201,162,39,0.15), transparent 70%);
+  border-radius: 50%;
+}
+
+.crosssell-banner > * { position: relative; z-index: 1; }
+
+.crosssell-banner h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.crosssell-banner p {
+  color: rgba(255,255,255,0.8);
+  font-size: 15px;
+  margin-bottom: 20px;
+  max-width: 700px;
+}
+
+.crosssell-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.crosssell-item {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crosssell-item .cs-icon {
+  font-size: 24px;
+}
+
+.crosssell-item .cs-text h5 {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.crosssell-item .cs-text p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+/* Footer */
+.footer {
+  background: var(--ins-dark);
+  color: rgba(255,255,255,0.6);
+  padding: 40px 32px;
+  text-align: center;
+  font-size: 13px;
+  margin-top: 48px;
+}
+
+.footer strong { color: var(--ins-accent); }
+
+@media (max-width: 768px) {
+  .header-nav { display: none; }
+  .hero h1 { font-size: 28px; }
+  .quote-form-grid { grid-template-columns: 1fr; }
+  .stats-bar { gap: 24px; }
+  .quote-section { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-icon">🛡️</div>
+    <span>TDC Insurance</span>
+  </div>
+  <nav class="header-nav">
+    <a>Personal</a>
+    <a>Commercial</a>
+    <a>Get a Quote</a>
+    <a>Claims</a>
+    <a>Pay Premium</a>
+    <a>Support</a>
+  </nav>
+  <div class="header-actions">
+    <button class="btn-login">Sign In</button>
+    <button class="btn-quote">Get a Quote</button>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🛡️ Part of TDC Group — Protecting Caribbean Families Since 1970</div>
+    <h1>Insurance that <span>protects what matters most</span></h1>
+    <p>Instant quotes, online policy management, and digital claims processing — for motor, home, travel, marine, and commercial insurance across St. Kitts and Nevis.</p>
+    <div class="hero-actions">
+      <button class="btn-hero-primary" onclick="document.getElementById('quickquote').scrollIntoView({behavior: 'smooth'})">Get Instant Quote →</button>
+      <button class="btn-hero-secondary">File a Claim</button>
+    </div>
+    <div class="stats-bar">
+      <div class="stat">
+        <h3>30 sec</h3>
+        <p>Instant Quote</p>
+      </div>
+      <div class="stat">
+        <h3>24 hrs</h3>
+        <p>Claims Response</p>
+      </div>
+      <div class="stat">
+        <h3>7,500+</h3>
+        <p>Policies in Force</p>
+      </div>
+      <div class="stat">
+        <h3>98%</h3>
+        <p>Claims Settled</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- Products -->
+  <h2 class="section-title">Insurance Products</h2>
+  <p class="section-subtitle">Comprehensive coverage for individuals, families, and businesses across the Federation.</p>
+
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="icon">🚗</div>
+      <h3>Motor Insurance</h3>
+      <p>Comprehensive or third-party coverage for private vehicles, commercial fleets, and motorcycles.</p>
+      <ul class="product-features">
+        <li>Instant online quote</li>
+        <li>Roadside assistance included</li>
+        <li>No-claims discount up to 35%</li>
+        <li>Bundle with TDC Automotive purchase</li>
+      </ul>
+      <button class="btn-product">Get Quote</button>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">🏠</div>
+      <h3>Home Insurance</h3>
+      <p>Protect your home and contents against fire, hurricane, theft, and natural disasters.</p>
+      <ul class="product-features">
+        <li>Hurricane and storm coverage</li>
+        <li>Contents and valuables protection</li>
+        <li>Bundle with HBD loyalty card</li>
+        <li>Online claims submission</li>
+      </ul>
+      <button class="btn-product">Get Quote</button>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">✈️</div>
+      <h3>Travel Insurance</h3>
+      <p>Coverage for medical emergencies, trip cancellation, and lost baggage — anywhere in the world.</p>
+      <ul class="product-features">
+        <li>Single-trip or annual multi-trip</li>
+        <li>Medical evacuation cover</li>
+        <li>Family and group plans</li>
+        <li>Instant digital policy issue</li>
+      </ul>
+      <button class="btn-product">Get Quote</button>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">⛵</div>
+      <h3>Pleasure Craft</h3>
+      <p>Specialist coverage for boats, yachts, and watercraft — designed for Caribbean waters.</p>
+      <ul class="product-features">
+        <li>Hull and liability cover</li>
+        <li>Hurricane haul-out provisions</li>
+        <li>Watersports and towing</li>
+        <li>Surveyor network access</li>
+      </ul>
+      <button class="btn-product">Get Quote</button>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">🏢</div>
+      <h3>Commercial Insurance</h3>
+      <p>Fire, liability, marine, and business interruption cover for enterprises of every size.</p>
+      <ul class="product-features">
+        <li>Business interruption cover</li>
+        <li>Public and product liability</li>
+        <li>Commercial property and stock</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <button class="btn-product">Request Quote</button>
+    </div>
+
+    <div class="product-card">
+      <div class="icon">👨‍👩‍👧</div>
+      <h3>Life Insurance</h3>
+      <p>Financial protection for your family with flexible term and whole-life policies.</p>
+      <ul class="product-features">
+        <li>Term and whole-life options</li>
+        <li>Critical illness rider</li>
+        <li>Education fund options</li>
+        <li>Tax-efficient savings component</li>
+      </ul>
+      <button class="btn-product">Request Quote</button>
+    </div>
+  </div>
+
+  <!-- Quick Quote Section -->
+  <div class="quote-section" id="quickquote">
+    <div class="quote-header">
+      <h2>Get Your Instant Quote</h2>
+      <p>Answer a few questions and receive your premium in under 30 seconds.</p>
+    </div>
+
+    <div class="quote-type-selector">
+      <button class="quote-type active" onclick="selectQuoteType(this)">
+        <div class="qt-icon">🚗</div>
+        <div class="qt-label">Motor</div>
+      </button>
+      <button class="quote-type" onclick="selectQuoteType(this)">
+        <div class="qt-icon">🏠</div>
+        <div class="qt-label">Home</div>
+      </button>
+      <button class="quote-type" onclick="selectQuoteType(this)">
+        <div class="qt-icon">✈️</div>
+        <div class="qt-label">Travel</div>
+      </button>
+      <button class="quote-type" onclick="selectQuoteType(this)">
+        <div class="qt-icon">⛵</div>
+        <div class="qt-label">Pleasure Craft</div>
+      </button>
+      <button class="quote-type" onclick="selectQuoteType(this)">
+        <div class="qt-icon">🏢</div>
+        <div class="qt-label">Commercial</div>
+      </button>
+    </div>
+
+    <div class="quote-form-grid">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" placeholder="John Williams" value="John Williams">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="john@example.com" value="john.williams@email.com">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="+1 (869) 555-0123" value="+1 (869) 555-0123">
+      </div>
+      <div class="form-group">
+        <label>Vehicle Year / Property Age</label>
+        <input type="text" placeholder="2024" value="2024">
+      </div>
+      <div class="form-group">
+        <label>Vehicle Make & Model / Property Type</label>
+        <input type="text" placeholder="Toyota Corolla" value="Toyota Corolla">
+      </div>
+      <div class="form-group">
+        <label>Estimated Value (EC$)</label>
+        <input type="text" placeholder="65,000" value="65,000">
+      </div>
+      <div class="form-group">
+        <label>No-Claims Discount</label>
+        <select>
+          <option>Yes — 5+ years (35%)</option>
+          <option>Yes — 3-4 years (20%)</option>
+          <option>Yes — 1-2 years (10%)</option>
+          <option>No discount</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Coverage Level</label>
+        <select>
+          <option>Comprehensive</option>
+          <option>Third Party, Fire & Theft</option>
+          <option>Third Party Only</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-submit" onclick="showQuoteResult()">Calculate My Premium →</button>
+
+    <div class="quote-result" id="quoteResult" style="display:none;">
+      <div class="quote-result-header">
+        <div>
+          <h3>Your Quote is Ready</h3>
+          <p style="font-size:13px;color:var(--ins-gray);margin-top:4px;">Reference: TDC-INS-2026-00847 · Valid for 30 days</p>
+        </div>
+        <div class="quote-premium">EC$1,247<small>/year</small></div>
+      </div>
+      <div class="quote-details">
+        <div class="quote-detail">
+          <div class="label">Coverage Type</div>
+          <div class="value">Comprehensive</div>
+        </div>
+        <div class="quote-detail">
+          <div class="label">Sum Insured</div>
+          <div class="value">EC$65,000</div>
+        </div>
+        <div class="quote-detail">
+          <div class="label">Excess</div>
+          <div class="value">EC$500</div>
+        </div>
+        <div class="quote-detail">
+          <div class="label">Monthly Option</div>
+          <div class="value">EC$112/mo</div>
+        </div>
+        <div class="quote-detail">
+          <div class="label">No-Claims Discount</div>
+          <div class="value">35% Applied</div>
+        </div>
+        <div class="quote-detail">
+          <div class="label">Policy Start</div>
+          <div class="value">Immediate</div>
+        </div>
+      </div>
+      <div style="margin-top:24px; display:flex; gap:12px; flex-wrap:wrap;">
+        <button class="btn-submit" style="flex:1; min-width:200px; margin-top:0;">Bind Policy Online →</button>
+        <button class="btn-product" style="flex:1; min-width:200px; background:white; color:var(--ins-primary); border:2px solid var(--ins-primary);">Email Quote to Me</button>
+      </div>
+      <p style="margin-top:16px; font-size:12px; color:var(--ins-gray); text-align:center;">💡 Bundle with a TDC Automotive purchase and save an additional 15%</p>
+    </div>
+  </div>
+
+  <!-- Claims -->
+  <div class="claims-section">
+    <h2 class="section-title">File a Claim in Minutes</h2>
+    <p class="section-subtitle">Our digital claims process gets you back on track faster.</p>
+
+    <div class="claims-steps">
+      <div class="claim-step">
+        <div class="step-icon">1</div>
+        <h4>Report Incident</h4>
+        <p>Submit claim online with photos and documents.</p>
+      </div>
+      <div class="claim-step">
+        <div class="step-icon">2</div>
+        <h4>Instant Acknowledgement</h4>
+        <p>Receive claim reference and next steps immediately.</p>
+      </div>
+      <div class="claim-step">
+        <div class="step-icon">3</div>
+        <h4>Assessment</h4>
+        <p>Adjuster reviews within 24 hours. Track progress online.</p>
+      </div>
+      <div class="claim-step">
+        <div class="step-icon">4</div>
+        <h4>Settlement</h4>
+        <p>Approved claims paid directly to your bank account.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <h2 class="section-title">Your Policies at a Glance</h2>
+  <p class="section-subtitle">Manage all your TDC Insurance policies from one dashboard.</p>
+
+  <div class="dashboard-preview">
+    <div class="dash-header">
+      <h3>Welcome back, John Williams</h3>
+      <span style="font-size:12px; opacity:0.7;">Last login: Oct 2, 2026</span>
+    </div>
+    <div class="dash-body">
+      <div class="dash-kpis">
+        <div class="dash-kpi">
+          <div class="label">Active Policies</div>
+          <div class="value accent">3</div>
+          <div class="sub">Motor, Home, Travel</div>
+        </div>
+        <div class="dash-kpi">
+          <div class="label">Annual Premium</div>
+          <div class="value">EC$4,280</div>
+          <div class="sub">Monthly: EC$357</div>
+        </div>
+        <div class="dash-kpi">
+          <div class="label">Next Renewal</div>
+          <div class="value">Nov 15</div>
+          <div class="sub">Motor — EC$1,247</div>
+        </div>
+        <div class="dash-kpi">
+          <div class="label">Open Claims</div>
+          <div class="value">1</div>
+          <div class="sub" style="color:var(--ins-warning);">Under review</div>
+        </div>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Policy #</th>
+            <th>Type</th>
+            <th>Coverage</th>
+            <th>Premium</th>
+            <th>Renewal</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TDC-MOT-0892</td>
+            <td>Motor — Toyota Corolla</td>
+            <td>EC$65,000</td>
+            <td>EC$1,247</td>
+            <td>Nov 15, 2026</td>
+            <td><span class="status-badge active">Active</span></td>
+          </tr>
+          <tr>
+            <td>TDC-HOM-1204</td>
+            <td>Home — Frigate Bay</td>
+            <td>EC$485,000</td>
+            <td>EC$2,580</td>
+            <td>Mar 8, 2027</td>
+            <td><span class="status-badge active">Active</span></td>
+          </tr>
+          <tr>
+            <td>TDC-TRV-0451</td>
+            <td>Travel — Annual Multi-Trip</td>
+            <td>EC$100,000</td>
+            <td>EC$453</td>
+            <td>Jun 22, 2027</td>
+            <td><span class="status-badge active">Active</span></td>
+          </tr>
+          <tr>
+            <td>TDC-CLM-2026-0187</td>
+            <td>Claim — Windshield damage</td>
+            <td>—</td>
+            <td>EC$1,850</td>
+            <td>—</td>
+            <td><span class="status-badge processing">Under Review</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Cross-sell -->
+  <div class="crosssell-banner">
+    <h3>🔗 TDC Group Advantage</h3>
+    <p>As a TDC Insurance policyholder, you unlock exclusive benefits across the Group.</p>
+    <div class="crosssell-grid">
+      <div class="crosssell-item">
+        <div class="cs-icon">🚗</div>
+        <div class="cs-text">
+          <h5>Automotive</h5>
+          <p>15% discount on motor insurance when buying a vehicle from TDC Automotive</p>
+        </div>
+      </div>
+      <div class="crosssell-item">
+        <div class="cs-icon">🏠</div>
+        <div class="cs-text">
+          <h5>Home & Building</h5>
+          <p>Home insurance + HBD loyalty card = annual premium discount</p>
+        </div>
+      </div>
+      <div class="crosssell-item">
+        <div class="cs-icon">💰</div>
+        <div class="cs-text">
+          <h5>Financial Services</h5>
+          <p>Set up automatic premium payments from your TDC account</p>
+        </div>
+      </div>
+      <div class="crosssell-item">
+        <div class="cs-icon">✈️</div>
+        <div class="cs-text">
+          <h5>Travel & Airline</h5>
+          <p>Travel insurance bundled with TDC Airline Services bookings</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p><strong>TDC Insurance — Digital Platform Prototype</strong></p>
+  <p style="margin-top:8px;">Part of the TDC Group Integrated Platform</p>
+  <p style="margin-top:16px; font-size:11px;">Prepared by B. Cuthbert John, PMP · October 2026</p>
+  <p style="font-size:11px;">This is a prototype for demonstration purposes. All rates and figures are illustrative.</p>
+</footer>
+
+<script>
+function selectQuoteType(el) {
+  document.querySelectorAll('.quote-type').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('quoteResult').style.display = 'none';
+}
+
+function showQuoteResult() {
+  const result = document.getElementById('quoteResult');
+  result.style.display = 'block';
+  result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+
+</body>
+</html>

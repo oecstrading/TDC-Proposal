@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TDC Group Digital Transformation — One-Page Summary</title>
+<style>
+@page { size: A4; margin: 10mm; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #E8EDF2;
+  color: #1A1A2E;
+  line-height: 1.4;
+  font-size: 9pt;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  padding: 12mm 12mm 10mm 12mm;
+  background: white;
+  margin: 0 auto;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ===== HEADER BAND ===== */
+.header-band {
+  background: linear-gradient(135deg, #001F3F 0%, #003366 55%, #004080 100%);
+  color: white;
+  padding: 8mm 8mm 7mm 8mm;
+  margin: -12mm -12mm 6mm -12mm;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-band::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -10%;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(0,169,165,0.18), transparent 70%);
+  border-radius: 50%;
+}
+
+.hb-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8mm;
+}
+
+.hb-left { flex: 1; }
+
+.hb-eyebrow {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #00A9A5;
+  margin-bottom: 3mm;
+}
+
+.hb-title {
+  font-size: 20pt;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 3mm;
+}
+
+.hb-title .grad {
+  background: linear-gradient(135deg, #00A9A5, #F58220);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hb-sub {
+  font-size: 9pt;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.45;
+  max-width: 120mm;
+  font-style: italic;
+}
+
+.hb-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.hb-right .name {
+  font-size: 11pt;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 1mm;
+}
+
+.hb-right .role {
+  font-size: 7pt;
+  color: #00A9A5;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  margin-bottom: 3mm;
+}
+
+.hb-right .contact {
+  font-size: 7.5pt;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}
+
+.hb-right .contact a { color: #F58220; text-decoration: none; }
+
+/* ===== FINDING STRIP ===== */
+.finding-strip {
+  background: #FEF3C7;
+  border-left: 4px solid #F59E0B;
+  padding: 4mm 5mm;
+  margin-bottom: 5mm;
+  display: flex;
+  align-items: center;
+  gap: 5mm;
+}
+
+.finding-strip .fs-score {
+  font-size: 24pt;
+  font-weight: 800;
+  color: #EF4444;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+}
+
+.finding-strip .fs-text {
+  font-size: 8.5pt;
+  color: #78350F;
+  line-height: 1.45;
+}
+
+.finding-strip .fs-text strong { color: #92400E; }
+
+/* ===== STAT ROW ===== */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3mm;
+  margin-bottom: 5mm;
+}
+
+.stat {
+  background: #F9FAFB;
+  border-top: 3px solid #003366;
+  padding: 3mm 3mm;
+  text-align: center;
+}
+
+.stat.warn { border-top-color: #F59E0B; }
+.stat.danger { border-top-color: #EF4444; }
+.stat.ok { border-top-color: #10B981; }
+
+.stat .num {
+  font-size: 15pt;
+  font-weight: 800;
+  color: #003366;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.stat.danger .num { color: #EF4444; }
+.stat.ok .num { color: #10B981; }
+
+.stat .lbl {
+  font-size: 6.5pt;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 1.5mm;
+  font-weight: 700;
+}
+
+/* ===== TWO COLUMN BODY ===== */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6mm;
+  flex: 1;
+}
+
+.col h3 {
+  font-size: 10pt;
+  font-weight: 800;
+  color: #001F3F;
+  margin-bottom: 2mm;
+  padding-bottom: 1mm;
+  border-bottom: 2px solid #00A9A5;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.col h3.orange { border-bottom-color: #F58220; }
+
+/* Phase list */
+.phase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5mm;
+  margin-bottom: 4mm;
+}
+
+.phase-item {
+  display: flex;
+  gap: 3mm;
+  align-items: flex-start;
+}
+
+.phase-item .phase-num {
+  width: 7mm;
+  height: 7mm;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00A9A5, #003366);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 7pt;
+  flex-shrink: 0;
+}
+
+.phase-item .phase-content h4 {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #001F3F;
+  margin-bottom: 0.5mm;
+}
+
+.phase-item .phase-content .dur {
+  font-size: 6.5pt;
+  color: #F58220;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.phase-item .phase-content p {
+  font-size: 7.5pt;
+  color: #6B7280;
+  line-height: 1.4;
+  margin-top: 0.5mm;
+}
+
+/* Investment box */
+.invest-mini {
+  background: linear-gradient(135deg, #001F3F, #003366);
+  color: white;
+  padding: 4mm;
+  border-radius: 3px;
+  margin-bottom: 4mm;
+}
+
+.invest-mini .im-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3mm;
+}
+
+.invest-mini .im-item .lbl {
+  font-size: 6pt;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  margin-bottom: 1mm;
+}
+
+.invest-mini .im-item .val {
+  font-size: 11pt;
+  font-weight: 800;
+  color: #00A9A5;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.invest-mini .im-item .val.orange { color: #F58220; }
+
+/* Engagement mini */
+.eng-mini {
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
+  margin-bottom: 4mm;
+}
+
+.eng-line {
+  display: flex;
+  gap: 2.5mm;
+  font-size: 7.5pt;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
+.eng-line .icon {
+  font-size: 9pt;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.5mm;
+}
+
+.eng-line strong { color: #001F3F; font-weight: 700; }
+
+/* Credentials mini */
+.creds-mini {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+}
+
+.creds-mini li {
+  font-size: 7.5pt;
+  color: #4B5563;
+  padding-left: 4mm;
+  position: relative;
+  line-height: 1.4;
+}
+
+.creds-mini li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #00A9A5;
+  font-weight: 800;
+  font-size: 7pt;
+}
+
+/* CTA strip */
+.cta-strip {
+  background: #F0F7FA;
+  border-left: 4px solid #00A9A5;
+  padding: 3.5mm 4mm;
+  margin-top: 4mm;
+  font-size: 8pt;
+  color: #001F3F;
+  line-height: 1.45;
+}
+
+.cta-strip strong { color: #003366; font-weight: 800; }
+
+/* Footer */
+.mini-footer {
+  margin-top: 4mm;
+  padding-top: 2mm;
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  justify-content: space-between;
+  font-size: 6.5pt;
+  color: #9CA3AF;
+}
+
+@media print {
+  body { background: white; }
+  .page { box-shadow: none; margin: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header-band">
+    <div class="hb-inner">
+      <div class="hb-left">
+        <div class="hb-eyebrow">Board Briefing · October 2026</div>
+        <div class="hb-title">Digital <span class="grad">Transformation</span><br>Proposal</div>
+        <div class="hb-sub">A unified platform connecting all nine TDC divisions — restoring customer experience, enabling cross-division revenue, and delivering real-time Group intelligence.</div>
+      </div>
+      <div class="hb-right">
+        <div class="name">B. Cuthbert John</div>
+        <div class="role">PMP · Systems Analyst</div>
+        <div class="contact">
+          <a href="mailto:cuthbert@oecstrading.com">cuthbert@oecstrading.com</a><br>
+          +1 (954) 478-6113<br>
+          <a href="https://oecstrading.com/portfolio">oecstrading.com/portfolio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINDING STRIP -->
+  <div class="finding-strip">
+    <div class="fs-score">2.8/10</div>
+    <div class="fs-text">
+      <strong>Current digital maturity.</strong> An independent assessment of TDC's public digital estate identified <strong>23 weaknesses, 8 vulnerabilities, and 14 strategic gaps</strong>. Only 2 of 9 divisions offer any online transactional capability. Comparable regional conglomerates operating unified platforms score 6–7.
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stat-row">
+    <div class="stat danger">
+      <div class="num">23</div>
+      <div class="lbl">Weaknesses</div>
+    </div>
+    <div class="stat warn">
+      <div class="num">8</div>
+      <div class="lbl">Vulnerabilities</div>
+    </div>
+    <div class="stat warn">
+      <div class="num">14</div>
+      <div class="lbl">Strategic Gaps</div>
+    </div>
+    <div class="stat ok">
+      <div class="num">24</div>
+      <div class="lbl">Recommendations</div>
+    </div>
+  </div>
+
+  <!-- TWO COLUMN BODY -->
+  <div class="two-col">
+
+    <!-- LEFT COLUMN -->
+    <div class="col">
+      <h3>18-Month Roadmap</h3>
+
+      <div class="phase-list">
+        <div class="phase-item">
+          <div class="phase-num">1</div>
+          <div class="phase-content">
+            <h4>Foundation &amp; Security</h4>
+            <div class="dur">Months 1–3</div>
+            <p>Security audit · Unified SSO · MFA rollout · Payment crediting fix · Performance optimisation</p>
+          </div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-num">2</div>
+          <div class="phase-content">
+            <h4>Quick Wins &amp; Revenue</h4>
+            <div class="dur">Months 3–6</div>
+            <p>Customer dashboard · Instant insurance quoting · Loan pre-qualification · Cross-division bundling · AI live chat</p>
+          </div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-num">3</div>
+          <div class="phase-content">
+            <h4>Integration &amp; Expansion</h4>
+            <div class="dur">Months 6–12</div>
+            <p>API gateway · Unified inventory · Mobile PWA · Automotive/Shipping/Real Estate portals · Executive dashboard</p>
+          </div>
+        </div>
+        <div class="phase-item">
+          <div class="phase-num">4</div>
+          <div class="phase-content">
+            <h4>Optimisation &amp; Intelligence</h4>
+            <div class="dur">Months 12–18</div>
+            <p>Full back-office integration · AI personalisation · Predictive analytics · Omnichannel orchestration</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="orange">Investment &amp; Return</h3>
+      <div class="invest-mini">
+        <div class="im-grid">
+          <div class="im-item">
+            <div class="lbl">Total Build (18 mo)</div>
+            <div class="val">EC$1.26M – $1.64M</div>
+          </div>
+          <div class="im-item">
+            <div class="lbl">Annual Ongoing</div>
+            <div class="val">EC$440K – $620K</div>
+          </div>
+          <div class="im-item">
+            <div class="lbl">Annual Benefit</div>
+            <div class="val orange">EC$9.7M – $15M</div>
+          </div>
+          <div class="im-item">
+            <div class="lbl">Payback · 3-Year ROI</div>
+            <div class="val orange">12–18 mo · 350%+</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col">
+      <h3>Engagement Model</h3>
+      <div class="eng-mini">
+        <div class="eng-line">
+          <div class="icon">🌐</div>
+          <div><strong>Remote leadership.</strong> Analysis, requirements, solution design, and project coordination led from Texas.</div>
+        </div>
+        <div class="eng-line">
+          <div class="icon">✈️</div>
+          <div><strong>Onsite visits.</strong> Six to eight milestone visits to St. Kitts over 18 months.</div>
+        </div>
+        <div class="eng-line">
+          <div class="icon">🤝</div>
+          <div><strong>In-country backstop.</strong> Vetted Systems Analyst based in St. Kitts for daily coordination and user support.</div>
+        </div>
+      </div>
+
+      <h3 class="orange">Why B. Cuthbert John</h3>
+      <ul class="creds-mini">
+        <li><strong>PMP certified since 2010 · Bachelor's in Accounting (1986)</strong> — governance discipline plus financial acumen</li>
+        <li><strong>Systems design since 1986</strong> — from COBOL/Fortran to today's AI-assisted tools</li>
+        <li><strong>Caribbean portfolio</strong> — 27+ applications in 15 months across FinTech, GovTech, ClimateTech, Property Intelligence</li>
+        <li><strong>QuickBooks Advanced ProAdvisor</strong> — 20 years of practical experience</li>
+        <li><strong>Halcyon Accelerator Finalist 2026</strong> — recognised innovation in climate-finance technology</li>
+      </ul>
+
+      <h3>What You Receive</h3>
+      <ul class="creds-mini">
+        <li><strong>Transformation Hub</strong> — interactive analysis, methodology, and roadmap</li>
+        <li><strong>Executive Summary</strong> — 4-page board-ready briefing</li>
+        <li><strong>Four interactive prototypes</strong> — Group platform, Home &amp; Building Depot, Financial Services, Insurance</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-strip">
+    <strong>Next Step:</strong> I respectfully request the opportunity to present this proposal to the Board or its designated sub-committee. Available for virtual or onsite presentation within two weeks. Prepared to begin Phase 1 within 30 days of engagement agreement.
+  </div>
+
+  <!-- FOOTER -->
+  <div class="mini-footer">
+    <span>TDC Group of Companies · P.O. Box 142, Fort Street, Basseterre, St. Kitts · 1 869 465 2511</span>
+    <span>Confidential · October 2026</span>
+  </div>
+
+</div>
+
+</body>
+</html>

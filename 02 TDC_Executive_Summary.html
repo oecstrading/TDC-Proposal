@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TDC Group Digital Transformation — Executive Summary</title>
+<style>
+@page { size: A4; margin: 18mm 16mm 20mm 16mm; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  color: #1A1A2E;
+  line-height: 1.55;
+  font-size: 11pt;
+  background: #E8EDF2;
+}
+
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 16mm 20mm 16mm;
+  background: white;
+  margin: 0 auto 8mm auto;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  position: relative;
+}
+
+/* COVER PAGE */
+.cover {
+  background: linear-gradient(135deg, #001F3F 0%, #003366 50%, #004080 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32mm 24mm;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -15%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(0,169,165,0.18), transparent 70%);
+  border-radius: 50%;
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  bottom: -25%; left: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(245,130,32,0.1), transparent 70%);
+  border-radius: 50%;
+}
+
+.cover-content { position: relative; z-index: 1; }
+
+.cover-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 60px;
+}
+
+.cover-logo {
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, #00A9A5, #F58220);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 900;
+  font-family: 'Inter', sans-serif;
+  color: white;
+}
+
+.cover-brand-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #00A9A5;
+}
+
+.cover-brand-text small {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1.5px;
+  margin-top: 3px;
+  text-transform: none;
+}
+
+.cover-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10pt;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #00A9A5;
+  margin-bottom: 14px;
+}
+
+.cover h1 {
+  font-family: 'Georgia', serif;
+  font-size: 34pt;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  max-width: 90%;
+}
+
+.cover h1 .accent {
+  color: #F58220;
+  font-style: italic;
+}
+
+.cover-subtitle {
+  font-size: 13pt;
+  color: rgba(255,255,255,0.7);
+  max-width: 85%;
+  line-height: 1.6;
+  margin-bottom: 48px;
+  font-style: italic;
+}
+
+.cover-meta {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.cover-meta-item .label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 4px;
+}
+
+.cover-meta-item .value {
+  font-family: 'Inter', sans-serif;
+  font-size: 11pt;
+  font-weight: 600;
+  color: white;
+}
+
+/* INNER PAGES */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #003366;
+  margin-bottom: 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 9pt;
+  color: #6B7280;
+}
+
+.page-header strong {
+  color: #003366;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.page-footer {
+  position: absolute;
+  bottom: 12mm;
+  left: 16mm;
+  right: 16mm;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid #E5E7EB;
+  font-family: 'Inter', sans-serif;
+  font-size: 8pt;
+  color: #9CA3AF;
+}
+
+h2 {
+  font-family: 'Georgia', serif;
+  font-size: 20pt;
+  font-weight: 700;
+  color: #003366;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #F58220;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 13pt;
+  font-weight: 700;
+  color: #001F3F;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+p { margin-bottom: 12px; text-align: justify; }
+
+.lead {
+  font-size: 12pt;
+  color: #374151;
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+/* Pull quote */
+.pullquote {
+  background: #F0F7FA;
+  border-left: 4px solid #00A9A5;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-style: italic;
+  font-size: 12pt;
+  color: #003366;
+  line-height: 1.6;
+}
+
+/* Scorecard table */
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 10pt;
+}
+
+.score-table th {
+  background: #003366;
+  color: white;
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.score-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid #E5E7EB;
+  vertical-align: middle;
+}
+
+.score-table tr:nth-child(even) td { background: #F9FAFB; }
+
+.score-num {
+  font-weight: 800;
+  font-size: 13pt;
+  color: #003366;
+}
+
+.score-num.low { color: #EF4444; }
+.score-num.mid { color: #F59E0B; }
+.score-num.high { color: #10B981; }
+
+.score-bar {
+  height: 6px;
+  background: #E5E7EB;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 100px;
+}
+
+.score-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #00A9A5, #003366);
+}
+
+/* Stats grid */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.stat-box {
+  background: #F9FAFB;
+  border-top: 3px solid #003366;
+  padding: 16px 14px;
+  text-align: center;
+}
+
+.stat-box.danger { border-top-color: #EF4444; }
+.stat-box.warn { border-top-color: #F59E0B; }
+.stat-box.ok { border-top-color: #10B981; }
+
+.stat-box .num {
+  font-family: 'Inter', sans-serif;
+  font-size: 22pt;
+  font-weight: 800;
+  color: #003366;
+  line-height: 1;
+}
+
+.stat-box .lbl {
+  font-family: 'Inter', sans-serif;
+  font-size: 8pt;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6B7280;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* Findings list */
+.findings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.finding-card {
+  background: #F9FAFB;
+  border-left: 3px solid #00A9A5;
+  padding: 14px 16px;
+}
+
+.finding-card.sev-high { border-left-color: #EF4444; }
+.finding-card.sev-med { border-left-color: #F59E0B; }
+
+.finding-card .finding-id {
+  font-family: 'Inter', sans-serif;
+  font-size: 8pt;
+  font-weight: 800;
+  color: #00A9A5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.finding-card.sev-high .finding-id { color: #EF4444; }
+.finding-card.sev-med .finding-id { color: #F59E0B; }
+
+.finding-card h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 10pt;
+  font-weight: 700;
+  color: #001F3F;
+  margin-bottom: 4px;
+}
+
+.finding-card p {
+  font-size: 9.5pt;
+  color: #4B5563;
+  margin: 0;
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* Roadmap table */
+.roadmap-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 9.5pt;
+}
+
+.roadmap-table th {
+  background: #003366;
+  color: white;
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 8.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.roadmap-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid #E5E7EB;
+  vertical-align: top;
+  line-height: 1.45;
+}
+
+.roadmap-table tr:nth-child(even) td { background: #F9FAFB; }
+
+.phase-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 8pt;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.phase-badge.p1 { background: #FEE2E2; color: #991B1B; }
+.phase-badge.p2 { background: #FEF3C7; color: #92400E; }
+.phase-badge.p3 { background: #DBEAFE; color: #1E40AF; }
+.phase-badge.p4 { background: #D1FAE5; color: #065F46; }
+
+/* Investment box */
+.investment-box {
+  background: linear-gradient(135deg, #003366, #001F3F);
+  color: white;
+  padding: 24px;
+  margin: 24px 0;
+  border-radius: 6px;
+}
+
+.investment-box h3 {
+  color: #00A9A5;
+  font-family: 'Inter', sans-serif;
+  font-size: 12pt;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.investment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.investment-item {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.investment-item .lbl {
+  font-family: 'Inter', sans-serif;
+  font-size: 9pt;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.investment-item .val {
+  font-family: 'Inter', sans-serif;
+  font-size: 16pt;
+  font-weight: 800;
+  color: #00A9A5;
+}
+
+.investment-item .val.orange { color: #F58220; }
+
+/* Conclusion */
+.conclusion {
+  background: #F0F7FA;
+  border-left: 4px solid #003366;
+  padding: 20px 24px;
+  margin: 24px 0;
+  font-size: 11pt;
+}
+
+.conclusion p:last-child { margin-bottom: 0; }
+
+/* Contact box */
+.contact-box {
+  background: #001F3F;
+  color: white;
+  padding: 24px;
+  margin-top: 32px;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.contact-box h3 {
+  color: #00A9A5;
+  font-family: 'Georgia', serif;
+  font-size: 16pt;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.contact-box p {
+  text-align: center;
+  margin: 4px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 10pt;
+  color: rgba(255,255,255,0.85);
+}
+
+.contact-box a {
+  color: #F58220;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* Print optimisations */
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1: COVER ============ -->
+<div class="page cover">
+  <div class="cover-content">
+    <div class="cover-brand">
+      <div class="cover-logo">TDC</div>
+      <div class="cover-brand-text">
+        TDC Group of Companies
+        <small>St. Kitts &amp; Nevis · Est. 1966</small>
+      </div>
+    </div>
+
+    <div class="cover-label">Executive Summary · Board Briefing</div>
+    <h1>Digital Transformation <span class="accent">Proposal</span></h1>
+    <div class="cover-subtitle">
+      A unified digital platform connecting all nine TDC divisions — restoring customer experience, enabling cross-division revenue, and delivering real-time group intelligence.
+    </div>
+
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="label">Prepared by</div>
+        <div class="value">B. Cuthbert John, PMP</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Date</div>
+        <div class="value">October 2, 2026</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Engagement</div>
+        <div class="value">Hybrid Consulting Model</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="label">Classification</div>
+        <div class="value">Confidential — Board Review</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAGE 2: EXECUTIVE OVERVIEW ============ -->
+<div class="page">
+  <div class="page-header">
+    <strong>TDC Group · Digital Transformation Proposal</strong>
+    <span>Executive Summary</span>
+  </div>
+
+  <h2>Executive Overview</h2>
+
+  <p class="lead">
+    TDC Group of Companies is one of the most diversified business groups in the Eastern Caribbean — nine divisions, 500+ employees, and EC$137.5M in annual revenue. Yet the Group's digital estate remains at an early stage of maturity. This proposal presents an evidence-based assessment, a systems design, and a phased 18-month roadmap to transform TDC into a digitally integrated enterprise.
+  </p>
+
+  <div class="pullquote">
+    "TDC's divisions are strong individually, but its digital presence is fragmented. Every day without a unified platform is a day of lost revenue, redundant cost, and unaddressed customer friction."
+  </div>
+
+  <h3>What We Found</h3>
+
+  <p>
+    An independent review of TDC's public digital properties — tdcgrouplimited.com, shoptdcgroup.com, tdcairbox.com, and tdcgroupinsurance.com — identified <strong>23 weaknesses, 8 vulnerabilities, and 14 strategic gaps</strong>. Only 2 of 9 divisions offer any online transactional capability. There is no unified customer identity, no cross-division bundling, and no shared back-office integration. Customer reviews reference payment crediting delays. Site performance indicators show load times above 3 seconds.
+  </p>
+
+  <p>
+    Critically, the Group's digital maturity scores <strong>2.8 out of 10</strong>. Comparable regional conglomerates with unified platforms operate at 6–7. This gap represents both risk and opportunity.
+  </p>
+
+  <div class="stat-grid">
+    <div class="stat-box danger">
+      <div class="num">2.8</div>
+      <div class="lbl">Digital Maturity</div>
+    </div>
+    <div class="stat-box danger">
+      <div class="num">2/9</div>
+      <div class="lbl">Divisions Online</div>
+    </div>
+    <div class="stat-box warn">
+      <div class="num">5</div>
+      <div class="lbl">Siloed Systems</div>
+    </div>
+    <div class="stat-box ok">
+      <div class="num">18</div>
+      <div class="lbl">Months to Transform</div>
+    </div>
+  </div>
+
+  <h3>The Opportunity</h3>
+
+  <p>
+    A unified platform will deliver three categories of value:
+  </p>
+
+  <p>
+    <strong>Revenue growth.</strong> Cross-division selling — vehicle + insurance + financing; home improvement + loan + shipping — can lift Group revenue by an estimated 5–8% annually. Improved digital conversion and new digital-only customers add further upside.
+  </p>
+
+  <p>
+    <strong>Cost reduction.</strong> Elimination of duplicate data entry, automated inventory reordering, reduced paper processing, and improved staff productivity can deliver EC$2.8M–$4.0M in annual savings.
+  </p>
+
+  <p>
+    <strong>Strategic positioning.</strong> Real-time Group analytics, omnichannel customer experience, and a scalable platform position TDC as the digital leader in the Eastern Caribbean — protecting market share and enabling future expansion.
+  </p>
+
+  <div class="page-footer">
+    <span>TDC Group · Digital Transformation Proposal</span>
+    <span>Page 2</span>
+  </div>
+</div>
+
+<!-- ============ PAGE 3: ASSESSMENT SCORECARD ============ -->
+<div class="page">
+  <div class="page-header">
+    <strong>TDC Group · Digital Transformation Proposal</strong>
+    <span>Assessment Scorecard</span>
+  </div>
+
+  <h2>Digital Maturity Scorecard</h2>
+
+  <p class="lead">
+    Five domains assessed against regional best practice. Current state reflects publicly observable evidence. Target state reflects what a unified platform can deliver within 18 months.
+  </p>
+
+  <table class="score-table">
+    <thead>
+      <tr>
+        <th style="width:28%;">Domain</th>
+        <th style="width:10%;">Current</th>
+        <th style="width:24%;">Progress</th>
+        <th style="width:10%;">Target</th>
+        <th>Key Finding</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Customer Experience</strong></td>
+        <td><span class="score-num low">2/10</span></td>
+        <td><div class="score-bar"><span style="width: 20%;"></span></div></td>
+        <td><span class="score-num high">8/10</span></td>
+        <td>No unified identity; only 2 divisions transact online</td>
+      </tr>
+      <tr>
+        <td><strong>Technical Architecture</strong></td>
+        <td><span class="score-num mid">3/10</span></td>
+        <td><div class="score-bar"><span style="width: 30%;"></span></div></td>
+        <td><span class="score-num high">8/10</span></td>
+        <td>Five disconnected domains; no API-first design</td>
+      </tr>
+      <tr>
+        <td><strong>Process Integration</strong></td>
+        <td><span class="score-num low">2/10</span></td>
+        <td><div class="score-bar"><span style="width: 20%;"></span></div></td>
+        <td><span class="score-num high">7/10</span></td>
+        <td>Division-level silos; no shared data layer</td>
+      </tr>
+      <tr>
+        <td><strong>Content &amp; Engagement</strong></td>
+        <td><span class="score-num mid">3/10</span></td>
+        <td><div class="score-bar"><span style="width: 30%;"></span></div></td>
+        <td><span class="score-num high">8/10</span></td>
+        <td>Brochure-style content; no SEO, no live chat</td>
+      </tr>
+      <tr>
+        <td><strong>Security &amp; Compliance</strong></td>
+        <td><span class="score-num mid">4/10</span></td>
+        <td><div class="score-bar"><span style="width: 40%;"></span></div></td>
+        <td><span class="score-num high">9/10</span></td>
+        <td>No MFA, missing security headers, PII scattered</td>
+      </tr>
+      <tr style="background: #F0F7FA;">
+        <td><strong>Overall Maturity</strong></td>
+        <td><span class="score-num low">2.8/10</span></td>
+        <td><div class="score-bar"><span style="width: 28%;"></span></div></td>
+        <td><span class="score-num high">8/10</span></td>
+        <td>Substantial transformation required across all domains</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Top 6 Critical Findings</h3>
+
+  <div class="findings">
+    <div class="finding-card sev-high">
+      <div class="finding-id">Critical · W1</div>
+      <h4>No Unified Customer Identity</h4>
+      <p>Customers create separate accounts for shop, Airbox, and insurance. Fragmented experience; no cross-division intelligence.</p>
+    </div>
+    <div class="finding-card sev-high">
+      <div class="finding-id">Critical · W10</div>
+      <h4>No Cross-Division Bundling</h4>
+      <p>Vehicle + insurance + financing bundles are not offered. Missed revenue; competitors capture bundled needs.</p>
+    </div>
+    <div class="finding-card sev-high">
+      <div class="finding-id">Critical · V2</div>
+      <h4>Missing Security Headers</h4>
+      <p>No HSTS, CSP, or X-Frame-Options. Increased risk of clickjacking, XSS, and MITM attacks.</p>
+    </div>
+    <div class="finding-card sev-high">
+      <div class="finding-id">Critical · V7</div>
+      <h4>Payment Crediting Delay</h4>
+      <p>Customer reviews cite 5-day delay for account credit via TDC's own payment site. Trust erosion risk.</p>
+    </div>
+    <div class="finding-card sev-med">
+      <div class="finding-id">High · W4</div>
+      <h4>No Online Loan Application</h4>
+      <p>Financial Services requires branch visits or phone calls. High friction; excludes after-hours applicants.</p>
+    </div>
+    <div class="finding-card sev-med">
+      <div class="finding-id">High · W5</div>
+      <h4>No Instant Insurance Quote</h4>
+      <p>Quote requests answered manually within 24 hours. Competitors offer instant quotes.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>TDC Group · Digital Transformation Proposal</span>
+    <span>Page 3</span>
+  </div>
+</div>
+
+<!-- ============ PAGE 4: ROADMAP & INVESTMENT ============ -->
+<div class="page">
+  <div class="page-header">
+    <strong>TDC Group · Digital Transformation Proposal</strong>
+    <span>Roadmap &amp; Investment</span>
+  </div>
+
+  <h2>18-Month Transformation Roadmap</h2>
+
+  <p class="lead">
+    Four phases, each delivering measurable value. Early phases focus on security and quick wins; later phases deliver full integration and intelligence.
+  </p>
+
+  <table class="roadmap-table">
+    <thead>
+      <tr>
+        <th style="width:12%;">Phase</th>
+        <th style="width:22%;">Focus</th>
+        <th>Key Deliverables</th>
+        <th style="width:18%;">Outcome</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="phase-badge p1">Phase 1</span><br><small>Months 1–3</small></td>
+        <td><strong>Foundation &amp; Security</strong></td>
+        <td>Security audit · Unified SSO · MFA rollout · Payment crediting fix · Performance optimisation</td>
+        <td>Zero critical findings; single login across all properties</td>
+      </tr>
+      <tr>
+        <td><span class="phase-badge p2">Phase 2</span><br><small>Months 3–6</small></td>
+        <td><strong>Quick Wins &amp; Revenue</strong></td>
+        <td>Customer dashboard · Insurance instant quoting · Loan pre-qualification · Cross-division bundling · Live chat</td>
+        <td>First measurable revenue uplift; customer adoption begins</td>
+      </tr>
+      <tr>
+        <td><span class="phase-badge p3">Phase 3</span><br><small>Months 6–12</small></td>
+        <td><strong>Integration &amp; Expansion</strong></td>
+        <td>API gateway · Unified inventory · Mobile PWA · Automotive/Shipping/Real Estate portals · Executive dashboard</td>
+        <td>All divisions transacting digitally; real-time Group visibility</td>
+      </tr>
+      <tr>
+        <td><span class="phase-badge p4">Phase 4</span><br><small>Months 12–18</small></td>
+        <td><strong>Optimisation &amp; Intelligence</strong></td>
+        <td>Full back-office integration · AI personalisation · Predictive analytics · Omnichannel orchestration</td>
+        <td>8/10 digital maturity; continuous improvement embedded</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="investment-box">
+    <h3>Investment Summary</h3>
+    <div class="investment-grid">
+      <div class="investment-item">
+        <div class="lbl">Total Build Investment (18 months)</div>
+        <div class="val">EC$1.26M – $1.64M</div>
+      </div>
+      <div class="investment-item">
+        <div class="lbl">Annual Ongoing (post-implementation)</div>
+        <div class="val">EC$440K – $620K</div>
+      </div>
+      <div class="investment-item">
+        <div class="lbl">Estimated Annual Benefit</div>
+        <div class="val orange">EC$9.7M – $15M</div>
+      </div>
+      <div class="investment-item">
+        <div class="lbl">Payback Period</div>
+        <div class="val orange">12 – 18 months</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Engagement Model: Hybrid Consulting</h3>
+
+  <p>
+    I propose a hybrid consulting engagement, not a traditional employee arrangement:
+  </p>
+
+  <p>
+    <strong>Remote leadership.</strong> I lead analysis, requirements, solution design, and project coordination remotely from Texas. <strong>Onsite visits.</strong> I travel to St. Kitts for 6–8 milestone visits over 18 months. <strong>In-country backstopping.</strong> A vetted Systems Analyst based in St. Kitts provides day-to-day coordination, user support, and continuity between visits.
+  </p>
+
+  <p>
+    This model gives TDC senior-level expertise and international best practice without the cost and commitment of a full-time senior hire, while ensuring local presence and responsiveness.
+  </p>
+
+  <h3>Next Steps</h3>
+
+  <p>
+    1. Review this Executive Summary and the accompanying Transformation Hub with TDC's Executive team. <br>
+    2. Schedule a discovery workshop (onsite or virtual) to validate findings. <br>
+    3. Confirm Phase 1 scope and mobilisation timeline. <br>
+    4. Execute engagement agreement and begin Phase 1 within 30 days.
+  </p>
+
+  <div class="conclusion">
+    <p>
+      TDC Group is at a pivotal moment. The businesses are strong, the brand is respected, and the customer base is loyal. But the digital landscape is shifting, and the gap between TDC and its digital competitors is widening. This proposal offers a pragmatic, phased path to close that gap — and to establish TDC as the digital leader in the Eastern Caribbean.
+    </p>
+    <p style="margin-bottom:0;">
+      I am prepared to lead this transformation. I welcome the opportunity to discuss this proposal with you.
+    </p>
+  </div>
+
+  <div class="contact-box">
+    <h3>B. Cuthbert John, PMP</h3>
+    <p>Systems Analyst &amp; AI Business Architect</p>
+    <p><a href="mailto:cuthbert@oecstrading.com">cuthbert@oecstrading.com</a> · +1 (954) 478-6113</p>
+    <p>Portfolio: <a href="https://oecstrading.com/portfolio">oecstrading.com/portfolio</a></p>
+    <p style="margin-top:12px; font-size:9pt; color:rgba(255,255,255,0.55);">
+      Prepared for TDC Group of Companies · P.O. Box 142, Fort Street, Basseterre, St. Kitts · 1 869 465 2511
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <span>TDC Group · Digital Transformation Proposal</span>
+    <span>Page 4</span>
+  </div>
+</div>
+
+</body>
+</html>

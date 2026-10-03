@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TDC Group Integrated Platform — Prototype</title>
+<style>
+:root {
+  --tdc-blue: #003366;
+  --tdc-deep: #001F3F;
+  --tdc-turquoise: #00A9A5;
+  --tdc-orange: #F58220;
+  --tdc-gold: #C9A227;
+  --tdc-light: #F4F7FA;
+  --tdc-white: #FFFFFF;
+  --tdc-dark: #1A1A2E;
+  --tdc-gray: #6B7280;
+  --tdc-border: #E5E7EB;
+  --tdc-success: #10B981;
+  --tdc-warning: #F59E0B;
+  --tdc-danger: #EF4444;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --shadow-xl: 0 20px 60px rgba(0,51,102,0.18);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--tdc-light);
+  color: var(--tdc-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== TOP NAVIGATION ===== */
+.top-nav {
+  background: rgba(0, 31, 63, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: white;
+  padding: 0 32px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.3px;
+}
+
+.nav-logo {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--tdc-turquoise), var(--tdc-orange));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+.nav-brand .brand-sub {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--tdc-turquoise);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  display: block;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: block;
+}
+
+.nav-links a:hover {
+  color: white;
+  background: rgba(255,255,255,0.08);
+}
+
+.nav-links a.active {
+  color: var(--tdc-deep);
+  background: var(--tdc-turquoise);
+}
+
+.nav-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mode-toggle {
+  display: flex;
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.mode-btn {
+  padding: 6px 16px;
+  border-radius: 18px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.mode-btn.active {
+  background: var(--tdc-orange);
+  color: white;
+}
+
+.btn-nav {
+  padding: 9px 20px;
+  border-radius: 20px;
+  border: none;
+  background: var(--tdc-orange);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.btn-nav:hover {
+  background: #E06A10;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(245,130,32,0.4);
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(135deg, var(--tdc-deep) 0%, var(--tdc-blue) 50%, #004080 100%);
+  color: white;
+  padding: 72px 32px 88px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -8%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(0,169,165,0.14), transparent 70%);
+  border-radius: 50%;
+  animation: float 12s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -50%;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(245,130,32,0.09), transparent 70%);
+  border-radius: 50%;
+  animation: float 15s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -30px); }
+}
+
+.hero-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,169,165,0.15);
+  border: 1px solid rgba(0,169,165,0.35);
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--tdc-turquoise);
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -1.2px;
+  margin-bottom: 20px;
+  max-width: 820px;
+}
+
+.hero h1 .grad {
+  background: linear-gradient(135deg, var(--tdc-turquoise), var(--tdc-orange));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-lead {
+  font-size: 18px;
+  color: rgba(255,255,255,0.72);
+  max-width: 680px;
+  margin-bottom: 40px;
+  line-height: 1.7;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-hero {
+  padding: 14px 32px;
+  border-radius: 28px;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-hero.primary {
+  background: var(--tdc-orange);
+  color: white;
+  box-shadow: 0 4px 20px rgba(245,130,32,0.35);
+}
+
+.btn-hero.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(245,130,32,0.45);
+}
+
+.btn-hero.secondary {
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.btn-hero.secondary:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 32px;
+  margin-top: 56px;
+  padding-top: 36px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.hero-stat .stat-value {
+  font-size: 34px;
+  font-weight: 800;
+  color: var(--tdc-turquoise);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.hero-stat .stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* ===== CONTENT CONTAINERS ===== */
+.content {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 64px 32px;
+}
+
+.section-header {
+  margin-bottom: 40px;
+}
+
+.section-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--tdc-turquoise);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  margin-bottom: 12px;
+  color: var(--tdc-deep);
+}
+
+.section-header p {
+  color: var(--tdc-gray);
+  font-size: 16px;
+  max-width: 720px;
+  line-height: 1.7;
+}
+
+/* ===== DIVISION CARDS ===== */
+.division-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.division-card {
+  background: white;
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--tdc-border);
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.division-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--tdc-turquoise), var(--tdc-orange));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.division-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--tdc-turquoise);
+}
+
+.division-card:hover::before {
+  opacity: 1;
+}
+
+.division-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 18px;
+  background: linear-gradient(135deg, rgba(0,169,165,0.12), rgba(0,51,102,0.08));
+}
+
+.division-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--tdc-deep);
+}
+
+.division-card p {
+  font-size: 14px;
+  color: var(--tdc-gray);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.division-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: var(--tdc-light);
+  color: var(--tdc-blue);
+  border: 1px solid var(--tdc-border);
+}
+
+/* ===== PORTAL MOCKUP ===== */
+.portal-mockup {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid var(--tdc-border);
+}
+
+.portal-tabs {
+  display: flex;
+  background: var(--tdc-light);
+  border-bottom: 1px solid var(--tdc-border);
+  padding: 0 8px;
+  overflow-x: auto;
+}
+
+.portal-tab {
+  padding: 16px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tdc-gray);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.portal-tab.active {
+  color: var(--tdc-blue);
+  border-bottom-color: var(--tdc-orange);
+}
+
+.portal-tab:hover {
+  color: var(--tdc-blue);
+}
+
+.portal-body {
+  padding: 32px;
+  min-height: 400px;
+}
+
+.portal-panel { display: none; }
+.portal-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+/* Dashboard widgets */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.kpi-card {
+  background: var(--tdc-light);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  border: 1px solid var(--tdc-border);
+  border-left: 4px solid var(--tdc-turquoise);
+}
+
+.kpi-card.warn { border-left-color: var(--tdc-warning); }
+.kpi-card.danger { border-left-color: var(--tdc-danger); }
+.kpi-card.success { border-left-color: var(--tdc-success); }
+
+.kpi-card .kpi-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--tdc-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.kpi-card .kpi-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--tdc-deep);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.kpi-card .kpi-change {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+  color: var(--tdc-gray);
+}
+
+.kpi-change.up { color: var(--tdc-success); }
+.kpi-change.down { color: var(--tdc-danger); }
+
+/* Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin-top: 24px;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--tdc-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid var(--tdc-border);
+  background: var(--tdc-light);
+}
+
+.data-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--tdc-border);
+  color: var(--tdc-dark);
+}
+
+.data-table tr:hover td {
+  background: rgba(0,169,165,0.04);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status-badge.active { background: #D1FAE5; color: #065F46; }
+.status-badge.pending { background: #FEF3C7; color: #92400E; }
+.status-badge.processing { background: #DBEAFE; color: #1E40AF; }
+.status-badge.shipped { background: #E0E7FF; color: #3730A3; }
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: white;
+  border: 1px solid var(--tdc-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--tdc-turquoise);
+}
+
+.product-img {
+  height: 140px;
+  background: linear-gradient(135deg, var(--tdc-light), #E2E8F0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44px;
+  color: var(--tdc-gray);
+}
+
+.product-info {
+  padding: 16px;
+}
+
+.product-info h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--tdc-deep);
+  line-height: 1.35;
+}
+
+.product-info .product-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--tdc-orange);
+}
+
+.product-info .product-division {
+  font-size: 10px;
+  color: var(--tdc-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+/* Form */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tdc-deep);
+}
+
+.form-group input, .form-group select, .form-group textarea {
+  padding: 12px 16px;
+  border: 1px solid var(--tdc-border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  background: white;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline: none;
+  border-color: var(--tdc-turquoise);
+  box-shadow: 0 0 0 3px rgba(0,169,165,0.1);
+}
+
+.btn-submit {
+  padding: 14px 32px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--tdc-orange);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  margin-top: 8px;
+}
+
+.btn-submit:hover {
+  background: #E06A10;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(245,130,32,0.35);
+}
+
+/* Integration banner */
+.integration-banner {
+  background: linear-gradient(135deg, rgba(0,51,102,0.04), rgba(0,169,165,0.06));
+  border: 1px solid rgba(0,169,165,0.2);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-top: 32px;
+}
+
+.integration-banner h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--tdc-deep);
+}
+
+.integration-banner ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.integration-banner li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--tdc-gray);
+  line-height: 1.5;
+}
+
+.integration-banner li::before {
+  content: '→';
+  color: var(--tdc-turquoise);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Chart mockup */
+.chart-mockup {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  height: 180px;
+  padding: 20px 0;
+  margin-top: 16px;
+}
+
+.chart-bar {
+  flex: 1;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(180deg, var(--tdc-turquoise), var(--tdc-blue));
+  position: relative;
+  transition: all 0.3s;
+  min-height: 20px;
+}
+
+.chart-bar:nth-child(even) {
+  background: linear-gradient(180deg, var(--tdc-orange), #E06A10);
+}
+
+.chart-bar:hover {
+  filter: brightness(1.1);
+}
+
+.chart-bar span {
+  position: absolute;
+  bottom: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--tdc-gray);
+  white-space: nowrap;
+}
+
+/* Footer */
+.platform-footer {
+  background: var(--tdc-deep);
+  color: rgba(255,255,255,0.55);
+  padding: 44px 32px;
+  text-align: center;
+  font-size: 13px;
+  margin-top: 64px;
+}
+
+.platform-footer strong {
+  color: var(--tdc-turquoise);
+  font-size: 14px;
+}
+
+.platform-footer .footer-contact {
+  margin-top: 14px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+}
+
+.platform-footer a {
+  color: var(--tdc-orange);
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hero h1 { font-size: 32px; }
+  .hero { padding: 48px 20px 64px; }
+  .content { padding: 40px 20px; }
+  .section-header h2 { font-size: 26px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .data-table { font-size: 12px; }
+  .data-table th, .data-table td { padding: 10px 10px; }
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 26px; }
+  .hero-stats { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .mode-toggle { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== TOP NAVIGATION ===== -->
+<nav class="top-nav">
+  <div class="nav-brand">
+    <div class="nav-logo">TDC</div>
+    <div>
+      Group Platform
+      <span class="brand-sub">Together We Succeed</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a class="active" onclick="showSection('home', this)">Home</a></li>
+    <li><a onclick="showSection('divisions', this)">Divisions</a></li>
+    <li><a onclick="showSection('portal', this)">Customer Portal</a></li>
+    <li><a onclick="showSection('backoffice', this)">Back Office</a></li>
+    <li><a onclick="showSection('analytics', this)">Group Analytics</a></li>
+  </ul>
+  <div class="nav-actions">
+    <div class="mode-toggle">
+      <button class="mode-btn active" onclick="setMode('customer', this)">Customer</button>
+      <button class="mode-btn" onclick="setMode('staff', this)">Staff</button>
+    </div>
+    <button class="btn-nav">Sign In</button>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: HOME                                              -->
+<!-- ============================================================ -->
+<section id="home" class="section active">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">🔗 One Group · One Platform · Together We Succeed</div>
+      <h1>Welcome to the <span class="grad">TDC Group</span> Integrated Digital Platform</h1>
+      <p class="hero-lead">A unified digital ecosystem connecting all TDC divisions — Retail, Financial Services, Insurance, Travel, Shipping, and Real Estate — with seamless customer experiences and integrated back-office operations.</p>
+      <div class="hero-actions">
+        <button class="btn-hero primary" onclick="showSection('portal', document.querySelector('.nav-links a:nth-child(3)'))">Explore Customer Portal →</button>
+        <button class="btn-hero secondary" onclick="showSection('backoffice', document.querySelector('.nav-links a:nth-child(4)'))">View Back Office</button>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-value">9+</div>
+          <div class="stat-label">Divisions Connected</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-value">16,000+</div>
+          <div class="stat-label">Products Online</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-value">EC$137M+</div>
+          <div class="stat-label">Annual Revenue</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-value">500+</div>
+          <div class="stat-label">Employees Empowered</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="section-header">
+      <div class="section-eyebrow">Why One Platform</div>
+      <h2>Breaking Silos Across the Group</h2>
+      <p>A single digital experience for customers and staff — connecting every division through a shared data layer, unified identity, and integrated workflows.</p>
+    </div>
+    <div class="division-grid">
+      <div class="division-card">
+        <div class="division-icon">🎯</div>
+        <h3>Unified Customer Experience</h3>
+        <p>One login, one profile, one payment method across all TDC divisions. Browse products, apply for loans, manage insurance, and track orders from a single dashboard.</p>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">🔄</div>
+        <h3>Cross-Division Integration</h3>
+        <p>Buy a car and get insurance and financing in one flow. Purchase building materials and arrange shipping. Every division connected through a shared data layer.</p>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">📊</div>
+        <h3>Group-Level Intelligence</h3>
+        <p>Real-time consolidated reporting across all divisions. Executive dashboards with drill-down capability from Group KPIs to individual store performance.</p>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">⚙️</div>
+        <h3>Integrated Back Office</h3>
+        <p>Shared inventory, CRM, finance, and HR modules. Automated workflows between sales, accounting, procurement, and logistics. Elimination of duplicate data entry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: DIVISIONS                                         -->
+<!-- ============================================================ -->
+<section id="divisions" class="section">
+  <div class="content">
+    <div class="section-header">
+      <div class="section-eyebrow">Group Structure</div>
+      <h2>TDC Group Divisions</h2>
+      <p>Nine business units. One integrated platform. Every division connected through shared identity, inventory, and intelligence.</p>
+    </div>
+    <div class="division-grid">
+      <div class="division-card">
+        <div class="division-icon">🏠</div>
+        <h3>TDC Home & Building Depot</h3>
+        <p>Largest shopping facility in the OECS. Paints, plumbing, electrical, hardware, building materials, lawn & garden, household goods, furniture, appliances, and electronics.</p>
+        <div class="division-tags">
+          <span class="tag">E-Commerce</span>
+          <span class="tag">Inventory</span>
+          <span class="tag">Delivery</span>
+          <span class="tag">Curbside Pickup</span>
+        </div>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">🚗</div>
+        <h3>TDC Automotive</h3>
+        <p>Largest car dealership on the island with Toyota, Suzuki, and Mitsubishi agencies. Yamaha outboard motors, tyres, and maintenance packages.</p>
+        <div class="division-tags">
+          <span class="tag">Vehicle Sales</span>
+          <span class="tag">Financing</span>
+          <span class="tag">Insurance</span>
+          <span class="tag">Service Booking</span>
+        </div>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">💰</div>
+        <h3>TDC Financial Services</h3>
+        <p>Affordable secured and unsecured loans, deposit products, and investment options. Loan amounts from EC$2,000 to EC$250,000.</p>
+        <div class="division-tags">
+          <span class="tag">Loan Origination</span>
+          <span class="tag">Deposits</span>
+          <span class="tag">Online Banking</span>
+          <span class="tag">Credit Scoring</span>
+        </div>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">🛡️</div>
+        <h3>TDC Insurance</h3>
+        <p>Personal and commercial lines including motor, home, travel, pleasure craft, fire, liability, and marine insurance.</p>
+        <div class="division-tags">
+          <span class="tag">Quote Engine</span>
+          <span class="tag">Policy Mgmt</span>
+          <span class="tag">Claims Portal</span>
+          <span class="tag">Online Payment</span>
+        </div>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">✈️</div>
+        <h3>TDC Airline Services</h3>
+        <p>Aircraft handling, airline agents, and tour operations at Robert L. Bradshaw International Airport.</p>
+        <div class="division-tags">
+          <span class="tag">Ground Handling</span>
+          <span class="tag">Cargo</span>
+          <span class="tag">Tour Ops</span>
+        </div>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">🚢</div>
+        <h3>TDC Shipping & Logistics</h3>
+        <p>Inter-island freight between St. Kitts and Nevis via chartered vessel. Stevedoring, port agency, and logistics services.</p>
+        <div class="division-tags">
+          <span class="tag">Freight Booking</span>
+          <span class="tag">Tracking</span>
+          <span class="tag">Customs</span>
+          <span class="tag">Warehousing</span>
+        </div>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">🏡</div>
+        <h3>TDC Real Estate</h3>
+        <p>Residential communities including Sunrise Hills Villas and The Residences at Dewars. Property development and sales.</p>
+        <div class="division-tags">
+          <span class="tag">Listings</span>
+          <span class="tag">Mortgage Integration</span>
+          <span class="tag">Virtual Tours</span>
+        </div>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">🖨️</div>
+        <h3>TDC Copy & Print Centre</h3>
+        <p>Office stationery, school supplies, copying, printing, graphic design, laminating, and binding. Agent for Canon and Lenovo.</p>
+        <div class="division-tags">
+          <span class="tag">Online Orders</span>
+          <span class="tag">Print Services</span>
+          <span class="tag">Corporate Accounts</span>
+        </div>
+      </div>
+      <div class="division-card">
+        <div class="division-icon">🚙</div>
+        <h3>TDC Thrifty Car Rental</h3>
+        <p>Vehicle rentals for tourists and corporate clients. Online booking and fleet management.</p>
+        <div class="division-tags">
+          <span class="tag">Online Booking</span>
+          <span class="tag">Fleet Mgmt</span>
+          <span class="tag">Corporate Rates</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="integration-banner">
+      <h3>🔗 Cross-Division Integration Examples</h3>
+      <ul>
+        <li>Customer buys a Toyota → System offers TDC Insurance quote and TDC Financial Services financing in one checkout flow</li>
+        <li>Home Depot order → TDC Shipping automatically calculates delivery options for Nevis and generates freight booking</li>
+        <li>Insurance policy renewal → Customer receives consolidated bill with option to pay via TDC Financial Services account</li>
+        <li>Loan applicant → TDC Financial Services pulls existing relationship data (insurance, purchases) to support credit decision</li>
+        <li>Corporate client → Single account manager view across all divisions with consolidated invoicing and reporting</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: CUSTOMER PORTAL                                   -->
+<!-- ============================================================ -->
+<section id="portal" class="section">
+  <div class="content">
+    <div class="section-header">
+      <div class="section-eyebrow">Customer Experience</div>
+      <h2>Customer Portal</h2>
+      <p>One unified experience across all TDC divisions — shop, apply, manage, and pay from anywhere.</p>
+    </div>
+
+    <div class="portal-mockup">
+      <div class="portal-tabs">
+        <button class="portal-tab active" onclick="switchPortalTab('dashboard', this)">My Dashboard</button>
+        <button class="portal-tab" onclick="switchPortalTab('shop', this)">Shop</button>
+        <button class="portal-tab" onclick="switchPortalTab('loans', this)">Loans & Finance</button>
+        <button class="portal-tab" onclick="switchPortalTab('insurance', this)">Insurance</button>
+        <button class="portal-tab" onclick="switchPortalTab('orders', this)">Orders & Shipping</button>
+      </div>
+      <div class="portal-body">
+
+        <!-- Dashboard Tab -->
+        <div id="portal-dashboard" class="portal-panel active">
+          <div class="dashboard-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">Active Loan Balance</div>
+              <div class="kpi-value">EC$12,450</div>
+              <div class="kpi-change up">Next payment: Oct 15</div>
+            </div>
+            <div class="kpi-card success">
+              <div class="kpi-label">Insurance Policies</div>
+              <div class="kpi-value">3</div>
+              <div class="kpi-change up">All active</div>
+            </div>
+            <div class="kpi-card warn">
+              <div class="kpi-label">Recent Orders</div>
+              <div class="kpi-value">2</div>
+              <div class="kpi-change">1 in transit to Nevis</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Loyalty Points</div>
+              <div class="kpi-value">4,280</div>
+              <div class="kpi-change up">+320 this month</div>
+            </div>
+          </div>
+          <h4 style="font-size:15px; font-weight:700; margin-top:32px; margin-bottom:4px; color: var(--tdc-deep);">Recent Activity</h4>
+          <table class="data-table">
+            <thead><tr><th>Date</th><th>Division</th><th>Activity</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Oct 1, 2026</td><td>Home & Building Depot</td><td>Paint & supplies order #HBD-4821</td><td>EC$245.00</td><td><span class="status-badge processing">Processing</span></td></tr>
+              <tr><td>Sep 28, 2026</td><td>Insurance</td><td>Motor policy renewal</td><td>EC$890.00</td><td><span class="status-badge active">Active</span></td></tr>
+              <tr><td>Sep 25, 2026</td><td>Automotive</td><td>Toyota service booking</td><td>EC$350.00</td><td><span class="status-badge active">Confirmed</span></td></tr>
+              <tr><td>Sep 20, 2026</td><td>Shipping</td><td>Freight booking to Nevis</td><td>EC$180.00</td><td><span class="status-badge shipped">In Transit</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Shop Tab -->
+        <div id="portal-shop" class="portal-panel">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
+            <h4 style="font-size:17px; font-weight:700; color: var(--tdc-deep);">Featured Products — All Divisions</h4>
+            <select style="padding:8px 16px; border-radius:8px; border:1px solid var(--tdc-border); font-family:inherit; font-size:13px;">
+              <option>All Divisions</option>
+              <option>Home & Building Depot</option>
+              <option>Automotive</option>
+              <option>Copy & Print</option>
+              <option>Real Estate</option>
+            </select>
+          </div>
+          <div class="product-grid">
+            <div class="product-card">
+              <div class="product-img">🎨</div>
+              <div class="product-info">
+                <h4>Premium Interior Paint — 5 Gallon</h4>
+                <div class="product-price">EC$189.00</div>
+                <div class="product-division">Home & Building Depot</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img">🚗</div>
+              <div class="product-info">
+                <h4>2026 Toyota Corolla — LX</h4>
+                <div class="product-price">EC$89,500</div>
+                <div class="product-division">Automotive</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img">🖨️</div>
+              <div class="product-info">
+                <h4>Canon PIXMA Office Printer</h4>
+                <div class="product-price">EC$450.00</div>
+                <div class="product-division">Copy & Print Centre</div>
+              </div>
+            </div>
+            <div class="product-card">
+              <div class="product-img">🏡</div>
+              <div class="product-info">
+                <h4>Sunrise Hills Villa — 3 Bed</h4>
+                <div class="product-price">EC$485,000</div>
+                <div class="product-division">Real Estate</div>
+              </div>
+            </div>
+          </div>
+          <div class="integration-banner">
+            <h3>💡 Smart Bundling</h3>
+            <ul>
+              <li>Buying a vehicle? Add Motor Insurance and Financing — pre-qualified in minutes</li>
+              <li>Building a home? Bundle materials + shipping + construction loan at a discounted rate</li>
+              <li>Office setup? Copy & Print equipment + service contract + extended warranty</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Loans Tab -->
+        <div id="portal-loans" class="portal-panel">
+          <h4 style="font-size:17px; font-weight:700; margin-bottom:20px; color: var(--tdc-deep);">Apply for a Loan — TDC Financial Services</h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" value="John Williams">
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" value="john.williams@email.com">
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" value="+1 (869) 555-0123">
+            </div>
+            <div class="form-group">
+              <label>Loan Type</label>
+              <select>
+                <option>Personal Loan</option>
+                <option>Home Improvement Loan</option>
+                <option>Vehicle Financing</option>
+                <option>Education Loan</option>
+                <option>Business Loan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Loan Amount (EC$)</label>
+              <input type="text" value="25,000">
+            </div>
+            <div class="form-group">
+              <label>Preferred Repayment Period</label>
+              <select>
+                <option>12 months</option>
+                <option>24 months</option>
+                <option selected>36 months</option>
+                <option>48 months</option>
+                <option>60 months</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label>Purpose of Loan</label>
+              <textarea rows="3">Home renovation — kitchen and bathroom upgrade.</textarea>
+            </div>
+          </div>
+          <button class="btn-submit">Submit Pre-Qualification →</button>
+
+          <div class="integration-banner">
+            <h3>🔗 Connected Services</h3>
+            <ul>
+              <li>Your existing TDC Insurance policies may qualify you for preferential loan rates</li>
+              <li>Vehicle loans can be bundled with TDC Automotive purchase and TDC Insurance motor policy</li>
+              <li>Home improvement loans can include Home & Building Depot materials and TDC Shipping delivery</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Insurance Tab -->
+        <div id="portal-insurance" class="portal-panel">
+          <h4 style="font-size:17px; font-weight:700; margin-bottom:20px; color: var(--tdc-deep);">Get an Insurance Quote — TDC Insurance</h4>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Insurance Type</label>
+              <select>
+                <option>Motor Insurance</option>
+                <option>Home Insurance</option>
+                <option>Travel Insurance</option>
+                <option>Pleasure Craft Insurance</option>
+                <option>Commercial Insurance</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Coverage Amount (EC$)</label>
+              <input type="text" value="50,000">
+            </div>
+            <div class="form-group">
+              <label>Vehicle Year / Property Age</label>
+              <input type="text" value="2024">
+            </div>
+            <div class="form-group">
+              <label>No-Claims Discount</label>
+              <select>
+                <option>Yes — 5+ years</option>
+                <option>Yes — 3-4 years</option>
+                <option>Yes — 1-2 years</option>
+                <option>No</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn-submit">Get Instant Quote →</button>
+
+          <div class="integration-banner">
+            <h3>🔗 TDC Group Advantage</h3>
+            <ul>
+              <li>Bundle Motor Insurance with a TDC Automotive purchase — save up to 15%</li>
+              <li>Home Insurance + Home & Building Depot loyalty card = annual premium discount</li>
+              <li>Pay premiums via TDC Financial Services account — set up automatic deductions</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Orders Tab -->
+        <div id="portal-orders" class="portal-panel">
+          <h4 style="font-size:17px; font-weight:700; margin-bottom:20px; color: var(--tdc-deep);">My Orders & Shipments</h4>
+          <table class="data-table">
+            <thead><tr><th>Order #</th><th>Division</th><th>Items</th><th>Total</th><th>Status</th><th>Delivery</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>HBD-4821</td><td>Home & Building Depot</td><td>Paint (3), Brushes (5), Drop cloth</td><td>EC$245.00</td>
+                <td><span class="status-badge processing">Processing</span></td><td>Pickup — Frigate Bay</td>
+              </tr>
+              <tr>
+                <td>SHIP-1120</td><td>TDC Shipping</td><td>Freight to Nevis — 2 pallets</td><td>EC$180.00</td>
+                <td><span class="status-badge shipped">In Transit</span></td><td>Vessel M.V. Puerto Real</td>
+              </tr>
+              <tr>
+                <td>AUTO-0892</td><td>Automotive</td><td>Vehicle service — Corolla</td><td>EC$350.00</td>
+                <td><span class="status-badge active">Confirmed</span></td><td>Oct 5 — C.A. Paul Southwell</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="integration-banner">
+            <h3>📦 Unified Order Tracking</h3>
+            <ul>
+              <li>Track orders from any TDC division in one place — retail, shipping, and service bookings</li>
+              <li>Real-time updates via SMS and email at every milestone</li>
+              <li>Consolidated delivery scheduling for multiple division orders to the same address</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: BACK OFFICE                                       -->
+<!-- ============================================================ -->
+<section id="backoffice" class="section">
+  <div class="content">
+    <div class="section-header">
+      <div class="section-eyebrow">Staff Operations</div>
+      <h2>Back-Office Management Suite</h2>
+      <p>Integrated operations across all divisions — sales, inventory, finance, CRM, and logistics in one platform.</p>
+    </div>
+
+    <div class="portal-mockup">
+      <div class="portal-tabs">
+        <button class="portal-tab active" onclick="switchOfficeTab('sales', this)">Sales & Orders</button>
+        <button class="portal-tab" onclick="switchOfficeTab('inventory', this)">Inventory</button>
+        <button class="portal-tab" onclick="switchOfficeTab('finance', this)">Finance</button>
+        <button class="portal-tab" onclick="switchOfficeTab('crm', this)">CRM</button>
+        <button class="portal-tab" onclick="switchOfficeTab('logistics', this)">Logistics</button>
+      </div>
+      <div class="portal-body">
+
+        <!-- Sales Tab -->
+        <div id="office-sales" class="portal-panel active">
+          <div class="dashboard-grid" style="margin-bottom:28px;">
+            <div class="kpi-card success">
+              <div class="kpi-label">Today's Sales</div>
+              <div class="kpi-value">EC$48,250</div>
+              <div class="kpi-change up">↑ 12.4% vs yesterday</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Orders Processed</div>
+              <div class="kpi-value">187</div>
+              <div class="kpi-change up">↑ 8 vs yesterday</div>
+            </div>
+            <div class="kpi-card warn">
+              <div class="kpi-label">Pending Fulfillment</div>
+              <div class="kpi-value">23</div>
+              <div class="kpi-change down">3 urgent</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Avg. Order Value</div>
+              <div class="kpi-value">EC$258</div>
+              <div class="kpi-change up">↑ 5.2%</div>
+            </div>
+          </div>
+          <h4 style="font-size:15px; font-weight:700; margin-bottom:4px; color: var(--tdc-deep);">Recent Orders — All Divisions</h4>
+          <table class="data-table">
+            <thead><tr><th>Order #</th><th>Customer</th><th>Division</th><th>Amount</th><th>Payment</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>HBD-4822</td><td>M. Thompson</td><td>Home & Building</td><td>EC$1,240</td><td>Card</td><td><span class="status-badge processing">Processing</span></td></tr>
+              <tr><td>AUTO-0893</td><td>R. Baptiste</td><td>Automotive</td><td>EC$89,500</td><td>Financing</td><td><span class="status-badge pending">Pending Approval</span></td></tr>
+              <tr><td>INS-3310</td><td>S. Williams</td><td>Insurance</td><td>EC$890</td><td>Online</td><td><span class="status-badge active">Paid</span></td></tr>
+              <tr><td>SHIP-1121</td><td>K. Isaac</td><td>Shipping</td><td>EC$420</td><td>Account</td><td><span class="status-badge shipped">Dispatched</span></td></tr>
+              <tr><td>FIN-2044</td><td>D. Liburd</td><td>Financial Services</td><td>EC$25,000</td><td>—</td><td><span class="status-badge processing">Under Review</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Inventory Tab -->
+        <div id="office-inventory" class="portal-panel">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+            <h4 style="font-size:17px; font-weight:700; color: var(--tdc-deep);">Unified Inventory Across Divisions</h4>
+            <select style="padding:8px 16px; border-radius:8px; border:1px solid var(--tdc-border); font-family:inherit; font-size:13px;">
+              <option>All Locations</option>
+              <option>St. Kitts — Frigate Bay</option>
+              <option>St. Kitts — Fort Street</option>
+              <option>Nevis — Charlestown</option>
+            </select>
+          </div>
+          <table class="data-table">
+            <thead><tr><th>SKU</th><th>Product</th><th>Division</th><th>Location</th><th>On Hand</th><th>Reorder</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>HBD-001</td><td>Interior Paint — White 5Gal</td><td>Home & Building</td><td>Frigate Bay</td><td>142</td><td>50</td><td><span class="status-badge active">OK</span></td></tr>
+              <tr><td>HBD-002</td><td>PVC Pipe 2" — 10ft</td><td>Home & Building</td><td>Frigate Bay</td><td>18</td><td>40</td><td><span class="status-badge pending">Low Stock</span></td></tr>
+              <tr><td>AUT-101</td><td>Toyota Corolla — LX</td><td>Automotive</td><td>C.A. Paul Southwell</td><td>7</td><td>3</td><td><span class="status-badge active">OK</span></td></tr>
+              <tr><td>CPT-201</td><td>Canon PIXMA Printer</td><td>Copy & Print</td><td>Fort Street</td><td>24</td><td>10</td><td><span class="status-badge active">OK</span></td></tr>
+              <tr><td>HBD-003</td><td>Cement — 50kg Bag</td><td>Home & Building</td><td>Nevis</td><td>8</td><td>30</td><td><span class="status-badge pending">Critical</span></td></tr>
+            </tbody>
+          </table>
+          <div class="integration-banner">
+            <h3>⚙️ Automated Inventory Actions</h3>
+            <ul>
+              <li>Low stock alerts trigger automatic purchase orders to suppliers</li>
+              <li>Inter-division stock transfers — Nevis Home Depot auto-requests from St. Kitts warehouse</li>
+              <li>E-commerce stock sync — online store reflects real-time availability across all locations</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Finance Tab -->
+        <div id="office-finance" class="portal-panel">
+          <div class="dashboard-grid" style="margin-bottom:28px;">
+            <div class="kpi-card success">
+              <div class="kpi-label">Group Revenue (MTD)</div>
+              <div class="kpi-value">EC$11.4M</div>
+              <div class="kpi-change up">↑ 14.3% YoY</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">Operating Profit</div>
+              <div class="kpi-value">EC$1.58M</div>
+              <div class="kpi-change up">↑ 8.7%</div>
+            </div>
+            <div class="kpi-card warn">
+              <div class="kpi-label">Accounts Receivable</div>
+              <div class="kpi-value">EC$2.1M</div>
+              <div class="kpi-change down">↓ 3.2%</div>
+            </div>
+            <div class="kpi-card success">
+              <div class="kpi-label">Cash Position</div>
+              <div class="kpi-value">EC$4.8M</div>
+              <div class="kpi-change up">↑ EC$320K</div>
+            </div>
+          </div>
+          <h4 style="font-size:15px; font-weight:700; margin-bottom:4px; color: var(--tdc-deep);">Division Performance — Current Month</h4>
+          <table class="data-table">
+            <thead><tr><th>Division</th><th>Revenue</th><th>Gross Margin</th><th>Operating Profit</th><th>vs Budget</th></tr></thead>
+            <tbody>
+              <tr><td>Home & Building Depot</td><td>EC$4.2M</td><td>28.5%</td><td>EC$890K</td><td><span class="status-badge active">+6.2%</span></td></tr>
+              <tr><td>Automotive</td><td>EC$2.8M</td><td>18.2%</td><td>EC$420K</td><td><span class="status-badge active">+4.1%</span></td></tr>
+              <tr><td>Financial Services</td><td>EC$1.9M</td><td>62.0%</td><td>EC$680K</td><td><span class="status-badge pending">-1.3%</span></td></tr>
+              <tr><td>Insurance</td><td>EC$1.4M</td><td>45.8%</td><td>EC$310K</td><td><span class="status-badge active">+9.7%</span></td></tr>
+              <tr><td>Shipping & Logistics</td><td>EC$0.8M</td><td>32.1%</td><td>EC$120K</td><td><span class="status-badge active">+12.5%</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- CRM Tab -->
+        <div id="office-crm" class="portal-panel">
+          <div class="dashboard-grid" style="margin-bottom:28px;">
+            <div class="kpi-card">
+              <div class="kpi-label">Total Customers</div>
+              <div class="kpi-value">28,450</div>
+              <div class="kpi-change up">↑ 1,240 this quarter</div>
+            </div>
+            <div class="kpi-card success">
+              <div class="kpi-label">Multi-Division Customers</div>
+              <div class="kpi-value">6,820</div>
+              <div class="kpi-change up">24% of customer base</div>
+            </div>
+            <div class="kpi-card success">
+              <div class="kpi-label">Avg. Relationship Value</div>
+              <div class="kpi-value">EC$4,850</div>
+              <div class="kpi-change up">↑ 11.2%</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">NPS Score</div>
+              <div class="kpi-value">72</div>
+              <div class="kpi-change up">↑ 5 points</div>
+            </div>
+          </div>
+          <h4 style="font-size:15px; font-weight:700; margin-bottom:4px; color: var(--tdc-deep);">Top Customers — Cross-Division View</h4>
+          <table class="data-table">
+            <thead><tr><th>Customer</th><th>Divisions</th><th>Lifetime Value</th><th>Last Activity</th><th>Segment</th></tr></thead>
+            <tbody>
+              <tr><td>Williams Construction Ltd</td><td>HBD, Shipping, Financial</td><td>EC$284,000</td><td>Oct 1 — HBD order</td><td><span class="status-badge active">Platinum</span></td></tr>
+              <tr><td>Sunset Hotels Ltd</td><td>HBD, Insurance, Automotive</td><td>EC$156,000</td><td>Sep 29 — Insurance renewal</td><td><span class="status-badge active">Gold</span></td></tr>
+              <tr><td>M. Thompson</td><td>HBD, Insurance, Copy & Print</td><td>EC$42,500</td><td>Oct 2 — HBD order</td><td><span class="status-badge pending">Silver</span></td></tr>
+              <tr><td>R. Baptiste</td><td>Automotive, Financial, Insurance</td><td>EC$89,500</td><td>Oct 2 — Auto purchase</td><td><span class="status-badge active">Platinum</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Logistics Tab -->
+        <div id="office-logistics" class="portal-panel">
+          <div class="dashboard-grid" style="margin-bottom:28px;">
+            <div class="kpi-card">
+              <div class="kpi-label">Active Shipments</div>
+              <div class="kpi-value">14</div>
+              <div class="kpi-change">8 to Nevis, 6 local</div>
+            </div>
+            <div class="kpi-card success">
+              <div class="kpi-label">On-Time Delivery</div>
+              <div class="kpi-value">94.2%</div>
+              <div class="kpi-change up">↑ 2.1%</div>
+            </div>
+            <div class="kpi-card success">
+              <div class="kpi-label">Fleet Utilization</div>
+              <div class="kpi-value">78%</div>
+              <div class="kpi-change up">Optimal range</div>
+            </div>
+            <div class="kpi-card success">
+              <div class="kpi-label">Avg. Delivery Time</div>
+              <div class="kpi-value">1.8 days</div>
+              <div class="kpi-change up">↓ 0.3 days</div>
+            </div>
+          </div>
+          <h4 style="font-size:15px; font-weight:700; margin-bottom:4px; color: var(--tdc-deep);">Active Shipments</h4>
+          <table class="data-table">
+            <thead><tr><th>Shipment #</th><th>Origin</th><th>Destination</th><th>Contents</th><th>ETA</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>SHIP-1120</td><td>Basseterre, SK</td><td>Charlestown, NV</td><td>Building materials — 2 pallets</td><td>Oct 3</td><td><span class="status-badge shipped">In Transit</span></td></tr>
+              <tr><td>SHIP-1119</td><td>Basseterre, SK</td><td>Charlestown, NV</td><td>Retail goods — 1 container</td><td>Oct 4</td><td><span class="status-badge processing">Loading</span></td></tr>
+              <tr><td>SHIP-1118</td><td>C.A. Paul Southwell, SK</td><td>Frigate Bay, SK</td><td>Automotive parts — 5 crates</td><td>Oct 2</td><td><span class="status-badge active">Delivered</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: GROUP ANALYTICS                                   -->
+<!-- ============================================================ -->
+<section id="analytics" class="section">
+  <div class="content">
+    <div class="section-header">
+      <div class="section-eyebrow">Executive Intelligence</div>
+      <h2>Group-Level Analytics & Executive Dashboard</h2>
+      <p>Consolidated intelligence across all divisions — real-time visibility for the Board and Executive team.</p>
+    </div>
+
+    <div class="dashboard-grid" style="margin-bottom:32px;">
+      <div class="kpi-card success">
+        <div class="kpi-label">Group Revenue (FYTD)</div>
+        <div class="kpi-value">EC$137.5M</div>
+        <div class="kpi-change up">↑ 14.3% YoY</div>
+      </div>
+      <div class="kpi-card success">
+        <div class="kpi-label">Profit After Tax</div>
+        <div class="kpi-value">EC$13.8M</div>
+        <div class="kpi-change up">↑ 106% YoY</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Total Assets</div>
+        <div class="kpi-value">EC$459.3M</div>
+        <div class="kpi-change up">↑ 2.3%</div>
+      </div>
+      <div class="kpi-card success">
+        <div class="kpi-label">Shareholders' Equity</div>
+        <div class="kpi-value">EC$200.3M</div>
+        <div class="kpi-change up">↑ 5.0%</div>
+      </div>
+    </div>
+
+    <div style="background:white; border-radius:var(--radius); padding:28px; box-shadow:var(--shadow-sm); border:1px solid var(--tdc-border); margin-bottom:28px;">
+      <h4 style="font-size:15px; font-weight:700; margin-bottom:20px; color: var(--tdc-deep);">Revenue by Division — Last 6 Months (EC$M)</h4>
+      <div class="chart-mockup">
+        <div class="chart-bar" style="height:85%;"><span>HBD</span></div>
+        <div class="chart-bar" style="height:62%;"><span>Auto</span></div>
+        <div class="chart-bar" style="height:48%;"><span>Fin</span></div>
+        <div class="chart-bar" style="height:38%;"><span>Ins</span></div>
+        <div class="chart-bar" style="height:22%;"><span>Ship</span></div>
+        <div class="chart-bar" style="height:15%;"><span>Copy</span></div>
+        <div class="chart-bar" style="height:10%;"><span>Other</span></div>
+      </div>
+      <div style="height:24px;"></div>
+    </div>
+
+    <div class="integration-banner">
+      <h3>📊 Executive Intelligence Capabilities</h3>
+      <ul>
+        <li>Drill-down from Group KPIs to individual store, branch, or product-line performance</li>
+        <li>Automated board pack generation with commentary and variance analysis</li>
+        <li>Real-time alerts when any division falls below budget or KPI thresholds</li>
+        <li>Cross-division customer profitability analysis — identify upsell and cross-sell opportunities</li>
+        <li>Scenario modelling for expansion, new division launch, or market downturn</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="platform-footer">
+  <p><strong>TDC Group Integrated Platform — Prototype</strong></p>
+  <p style="margin-top:10px;">One Group · One Platform · Together We Succeed</p>
+  <div class="footer-contact">
+    Prepared by B. Cuthbert John, PMP · Systems Analyst & AI Business Architect<br>
+    <a href="mailto:cuthbert@oecstrading.com">cuthbert@oecstrading.com</a> · +1 (954) 478-6113 · <a href="https://oecstrading.com/portfolio">oecstrading.com/portfolio</a>
+  </div>
+  <p style="margin-top:20px; font-size:11px; color: rgba(255,255,255,0.35);">This is a prototype for demonstration purposes. All data is illustrative.</p>
+</footer>
+
+<script>
+// ===== SECTION NAVIGATION =====
+function showSection(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if (el) el.classList.add('active');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== PORTAL TABS =====
+function switchPortalTab(id, btn) {
+  document.querySelectorAll('#portal .portal-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#portal .portal-tab').forEach(t => t.classList.remove('active'));
+  const target = document.getElementById('portal-' + id);
+  if (target) target.classList.add('active');
+  btn.classList.add('active');
+}
+
+// ===== BACK OFFICE TABS =====
+function switchOfficeTab(id, btn) {
+  document.querySelectorAll('#backoffice .portal-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#backoffice .portal-tab').forEach(t => t.classList.remove('active'));
+  const target = document.getElementById('office-' + id);
+  if (target) target.classList.add('active');
+  btn.classList.add('active');
+}
+
+// ===== MODE TOGGLE =====
+function setMode(mode, btn) {
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Visual feedback (full role-based switching would be a production feature)
+  if (mode === 'staff') {
+    document.body.style.setProperty('--mode-indicator', 'staff');
+  } else {
+    document.body.style.setProperty('--mode-indicator', 'customer');
+  }
+}
+
+// ===== KEYBOARD SHORTCUTS =====
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('%c TDC Group Integrated Platform — Prototype ', 'background: #003366; color: #00A9A5; font-weight: bold; padding: 6px 12px; border-radius: 4px; font-size: 13px;');
+  console.log('Prepared by B. Cuthbert John, PMP · cuthbert@oecstrading.com');
+});
+</script>
+
+</body>
+</html>
